@@ -9,8 +9,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MainActivity extends AppCompatActivity {
     private Button signup;
+    FirebaseAuth fAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
                 openSignUp();
             }
         });
+
+
+        fAuth = FirebaseAuth.getInstance();
     }
 
     public void openSignUp(){
