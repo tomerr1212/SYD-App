@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -24,7 +23,7 @@
         android:gravity="center"
         android:text="@string/app_name"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="34dp"
+        android:textSize="34sp"
         android:textStyle="bold"
         android:id="@+id/txt" />
 
@@ -37,7 +36,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/txt"
         android:layout_marginTop="-500dp"
-        android:layout_marginRight="70dp"
+        android:layout_marginEnd="70dp"
         android:background="@drawable/shape"
         android:padding="15dp"
         android:hint="@string/UserName"
@@ -55,7 +54,7 @@
         android:layout_below="@+id/txt"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="-440dp"
-        android:layout_marginRight="70dp"
+        android:layout_marginEnd="70dp"
         android:background="@drawable/shape"
         android:padding="15dp"
         android:hint="@string/Password"
@@ -67,8 +66,8 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="200dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="200dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/login_password"
         android:text="Forget Password?"
@@ -85,24 +84,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="400dp"
-        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
             android:layout_centerHorizontal="true"
             android:backgroundTint="@color/turquoise"
         android:text="@string/Login"
         android:visibility="visible"
          />
 
-    <Button
-        android:id="@+id/SignUp_button"
+    <TextView
+        android:id="@+id/textViewSignup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="12dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="450dp"
         android:background="#23776c"
         android:focusable="true"
-        android:text="@string/SignUp"
+        android:text="SIGNUP HERE"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:visibility="visible" />
+
+
 
 
 </RelativeLayout>

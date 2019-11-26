@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button signup;
     FirebaseAuth fAuth;
 
@@ -20,22 +20,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        signup = (Button) findViewById(R.id.SignUp_button);
-        signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openSignUp();
-            }
-        });
-
-
-        fAuth = FirebaseAuth.getInstance();
+        findViewById(R.id.textViewSignup).setOnClickListener(this);
     }
 
-    public void openSignUp(){
-        Intent intent = new Intent(this, signup.class);
-        startActivity(intent);
+    @Override
+    public void onClick(View view){
+        switch(view.getId()){
+            case R.id.textViewSignup:
+                startActivity(new Intent(this,signup.class));
+
+                break;
+        }
 
     }
+
 
 }
