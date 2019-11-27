@@ -15,12 +15,21 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class signup extends AppCompatActivity implements View.OnClickListener  {
     ProgressBar progressBar;
-    EditText editTextUsername,editTextEmail,editTextName,editTextPassword,editTextConfirmPassword;
+    EditText editTextUsername,editTextEmail,editTextName,editTextAge,editTextPassword,editTextConfirmPassword;
 
+    Member member;
+    long maxId=0;
     private FirebaseAuth mAuth;
+    DatabaseReference dbreff;
 
 
     @Override
@@ -31,11 +40,28 @@ public class signup extends AppCompatActivity implements View.OnClickListener  {
         editTextUsername = findViewById(R.id.editUserName);
         editTextEmail = findViewById(R.id.editEmail);
         editTextName = findViewById(R.id.editName);
+        editTextAge = findViewById(R.id.editAge);
         editTextPassword = findViewById(R.id.editPassword);
         editTextConfirmPassword = findViewById(R.id.editConfirmPassword);
+
+        member=new Member();
         progressBar= findViewById(R.id.progressBar);
 
         mAuth = FirebaseAuth.getInstance();
+        dbreff= FirebaseDatabase.getInstance().getReference().child("Member");
+        dbreff.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    maxId=dataSnapshot.getChildrenCount();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         findViewById(R.id.btnSignUP).setOnClickListener(this);
         findViewById(R.id.textViewLogin).setOnClickListener(this);
     }
@@ -46,6 +72,7 @@ public class signup extends AppCompatActivity implements View.OnClickListener  {
         String username =editTextUsername.getText().toString().trim();
         String email =editTextEmail.getText().toString().trim();
         String name =editTextName.getText().toString().trim();
+        String age =editTextAge.getText().toString().trim();
         String password =editTextPassword.getText().toString().trim();
         String cPaswword =editTextConfirmPassword.getText().toString().trim();
 
@@ -69,6 +96,11 @@ public class signup extends AppCompatActivity implements View.OnClickListener  {
         if(name.isEmpty()){
             editTextName.setError("Name is required");
             editTextName.requestFocus();
+            return;
+        }
+        if(age.isEmpty()){
+            editTextAge.setError("Age is required");
+            editTextAge.requestFocus();
             return;
         }
         if(password.isEmpty()){
@@ -101,10 +133,20 @@ public class signup extends AppCompatActivity implements View.OnClickListener  {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressBar.setVisibility(View.GONE);
                 if(task.isSuccessful()){
-                    Toast.makeText(getApplicationContext(),"User SignedUp succesfully", Toast.LENGTH_SHORT).show();
+                    int age = Integer.parseInt(editTextAge.getText().toString().trim());
+                    String name = editTextName.getText().toString().trim();
+                    member.setAge(age);
+                    member.setName(name);
+                    dbreff.child(String.valueOf(maxId+1)).setValue(member);
+
+                    Toast.makeText(getApplicationContext(),"User SignedUp successfully", Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(getApplicationContext(),"Some error occured",Toast.LENGTH_SHORT).show();
-                }
+                    if(task.getException() instanceof FirebaseAuthUserCollisionException){
+                        Toast.makeText(getApplicationContext(),"You are already signed up", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                        Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
             }
         });
 
