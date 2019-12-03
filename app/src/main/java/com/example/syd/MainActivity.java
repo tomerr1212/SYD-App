@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-        //findViewById(R.id.textViewSignup).setOnClickListener(this);
+        findViewById(R.id.textViewSignup).setOnClickListener(this);
 
         //Status Bar Color
         getWindow().setStatusBarColor(Color.WHITE);
