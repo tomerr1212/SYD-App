@@ -47,8 +47,7 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
         editTextAge = findViewById(R.id.editAge);
 
         radioGenderGroup = findViewById(R.id.radioGenderGroup);
-//        radioButtonFemale = findViewById(R.id.radioButtonFemale);
-//        radioButtonMale = findViewById(R.id.radioButtonMale);
+
 
         editTextKG = findViewById(R.id.editTextKG);
         editTextCM = findViewById(R.id.editTextCM);

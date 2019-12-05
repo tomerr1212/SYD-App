@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         findViewById(R.id.textViewSignup).setOnClickListener(this);
-
+        findViewById(R.id.Login_button).setOnClickListener(this);
         getWindow().setStatusBarColor(Color.WHITE);
 
 
@@ -67,8 +67,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this,signup.class));
                 break;
 
-            case R.id.textViewLogin:
-                userLogin();
+            case R.id.Login_button:
+                startActivity(new Intent(this,Home.class));
         }
 
     }
