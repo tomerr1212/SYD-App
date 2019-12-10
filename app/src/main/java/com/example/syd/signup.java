@@ -1,8 +1,5 @@
 package com.example.syd;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -12,6 +9,9 @@ import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -193,8 +193,8 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
                 break;
 
             case R.id.textViewLogin:
-                finish();
-                startActivity(new Intent(this, MainActivity.class));
+              //  finish();
+                startActivity(new Intent(this, Home.class));
                 break;
 
         }
