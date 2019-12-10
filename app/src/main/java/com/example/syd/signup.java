@@ -78,11 +78,6 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
     }
 
 
-//    public void checkButton(View view) {
-//        int radioID = radioGenderGroup.getCheckedRadioButtonId();
-//        radioButtonGender = findViewById(radioID);
-//        Toast.makeText(this, "Selected: "+radioButtonGender.getText(),Toast.LENGTH_SHORT).show();
-//    }
 
     private boolean registerUser() {
 
@@ -174,7 +169,6 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
                     member.setWeight(weight);
                     member.setHeight(height);
                     member.setGender(gender);
-                    //member.setGender(radioButtonGender.getText().toString());
                     dbreff.child(String.valueOf(maxId + 1)).setValue(member);
 
                     Toast.makeText(getApplicationContext(), "User SignedUp successfully", Toast.LENGTH_SHORT).show();
@@ -183,7 +177,7 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
                     if (task.getException() instanceof FirebaseAuthUserCollisionException) {
                         Toast.makeText(getApplicationContext(), "You are already signed up", Toast.LENGTH_SHORT).show();
                     } else
-                        Toast.makeText(getApplicationContext(), "..............................."+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -188,16 +188,15 @@
             android:layout_width="match_parent"
             android:layout_height="33dp"
             android:text="Female"
-
-           />
+            android:buttonTint="@color/colorPrimaryDark"/>
 
         <RadioButton
             android:id="@+id/radioButtonMale"
             android:layout_width="match_parent"
             android:layout_height="33dp"
             android:text="Male"
-            android:checked="true"
-            />
+            android:buttonTint="@color/colorPrimaryDark"
+            android:checked="true" />
 
     </RadioGroup>
 
