@@ -84,10 +84,11 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
 //        Toast.makeText(this, "Selected: "+radioButtonGender.getText(),Toast.LENGTH_SHORT).show();
 //    }
 
-    private void registerUser() {
+    private boolean registerUser() {
 
         String email = editTextEmail.getText().toString().trim();
         String name = editTextName.getText().toString().trim();
+
         String age = editTextAge.getText().toString().trim();
         String KG = editTextKG.getText().toString().trim();
         String CM = editTextCM.getText().toString().trim();
@@ -95,59 +96,65 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
         String cPaswword = editTextConfirmPassword.getText().toString().trim();
 
 
+        int selectedId = radioGenderGroup.getCheckedRadioButtonId();
+        // find the radiobutton by returned id
+        radioButtonGender = (RadioButton) findViewById(selectedId);
+        final String gender = (String)radioButtonGender.getText();
+
+
         if (email.isEmpty()) {
             editTextEmail.setError("Email is required");
             editTextEmail.requestFocus();
-            return;
+            return false;
         }
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             editTextEmail.setError("Please insert a valid Email");
             editTextEmail.requestFocus();
-            return;
+            return false;
         }
 
         if (name.isEmpty()) {
             editTextName.setError("Name is required");
             editTextName.requestFocus();
-            return;
+            return false;
         }
         if (age.isEmpty()) {
             editTextAge.setError("Age is required");
             editTextAge.requestFocus();
-            return;
+            return false;
         }
         if (KG.isEmpty()) {
             editTextAge.setError("Weight is required");
             editTextAge.requestFocus();
-            return;
+            return false;
         }
         if (CM.isEmpty()) {
             editTextAge.setError("Height is required");
             editTextAge.requestFocus();
-            return;
+            return false;
         }
         if (password.isEmpty()) {
             editTextPassword.setError("Password is required");
             editTextPassword.requestFocus();
-            return;
+            return false;
         }
         if (password.length() < 6) {
             editTextPassword.setError("Minimum length of password should be 6");
             editTextPassword.requestFocus();
-            return;
+            return false;
         }
 
         if (cPaswword.isEmpty()) {
             editTextConfirmPassword.setError("Please Confirm your password");
             editTextConfirmPassword.requestFocus();
-            return;
+            return false;
         }
 
         if (!password.matches(cPaswword)) {
             editTextConfirmPassword.setError("The password are not matched");
             editTextConfirmPassword.requestFocus();
-            return;
+            return false;
         }
 
         progressBar.setVisibility(View.VISIBLE);
@@ -165,35 +172,38 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
                     member.setAge(age);
                     member.setName(name);
                     member.setWeight(weight);
-                    member.setGender(radioButtonGender.getText().toString());
+                    member.setHeight(height);
+                    member.setGender(gender);
+                    //member.setGender(radioButtonGender.getText().toString());
                     dbreff.child(String.valueOf(maxId + 1)).setValue(member);
 
                     Toast.makeText(getApplicationContext(), "User SignedUp successfully", Toast.LENGTH_SHORT).show();
+
                 } else {
                     if (task.getException() instanceof FirebaseAuthUserCollisionException) {
                         Toast.makeText(getApplicationContext(), "You are already signed up", Toast.LENGTH_SHORT).show();
                     } else
-                        Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "..............................."+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-
+        return true;
     }
 
 
     @Override
     public void onClick(View view) {
 
-        boolean checked = ((RadioButton) view).isChecked();
+       // boolean checked = ( view).isChecked();
         switch (view.getId()) {
             case R.id.btnSignUP:
-                registerUser();
-                startActivity(new Intent(this, MainActivity.class));
+                if(registerUser())
+                    startActivity(new Intent(this, MainActivity.class));
                 break;
 
             case R.id.textViewLogin:
-              //  finish();
+              //  credential(log in details);
                 startActivity(new Intent(this, Home.class));
                 break;
 
