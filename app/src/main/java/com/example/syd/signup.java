@@ -47,8 +47,6 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
         editTextAge = findViewById(R.id.editAge);
 
         radioGenderGroup = findViewById(R.id.radioGenderGroup);
-
-
         editTextKG = findViewById(R.id.editTextKG);
         editTextCM = findViewById(R.id.editTextCM);
         editTextPassword = findViewById(R.id.editPassword);
@@ -66,15 +64,14 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
                     maxId = dataSnapshot.getChildrenCount();
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
 
-        findViewById(R.id.btnSignUP).setOnClickListener(this);
-        findViewById(R.id.textViewLogin).setOnClickListener(this);
+        findViewById(R.id.textViewSignUP2).setOnClickListener(this);
+        findViewById(R.id.textViewAlreadyLoggedIn).setOnClickListener(this);
     }
 
 
@@ -83,7 +80,6 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
 
         String email = editTextEmail.getText().toString().trim();
         String name = editTextName.getText().toString().trim();
-
         String age = editTextAge.getText().toString().trim();
         String KG = editTextKG.getText().toString().trim();
         String CM = editTextCM.getText().toString().trim();
@@ -191,14 +187,14 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
 
        // boolean checked = ( view).isChecked();
         switch (view.getId()) {
-            case R.id.btnSignUP:
+            case R.id.textViewSignUP2:
                 if(registerUser())
-                    startActivity(new Intent(this, MainActivity.class));
+                    startActivity(new Intent(this, login.class));
                 break;
 
-            case R.id.textViewLogin:
-              //  credential(log in details);
-                startActivity(new Intent(this, Home.class));
+            case R.id.textViewAlreadyLoggedIn:
+                //  credential(log in details);
+                startActivity(new Intent(this, login.class));
                 break;
 
         }

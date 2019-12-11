@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class login extends AppCompatActivity implements View.OnClickListener {
 
     EditText editTextEmail,editTextPassword;
     private FirebaseAuth mAuth;
@@ -19,13 +19,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         findViewById(R.id.textViewSignup).setOnClickListener(this);
         findViewById(R.id.textViewLogin).setOnClickListener(this);
         getWindow().setStatusBarColor(Color.WHITE);
-
 
     }
 
@@ -47,12 +46,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view){
         switch(view.getId()){
             case R.id.textViewSignup:
-                System.out.println("In case MainMe");
+
                 startActivity(new Intent(this,signup.class));
                 break;
 
             case R.id.textViewLogin:
-                startActivity(new Intent(this,Home.class));
+                startActivity(new Intent(this,MainActivity.class));
         }
 
     }

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "28679631706",
+    "firebase_url": "https://sydfirebaseproject-60fc3.firebaseio.com",
+    "project_id": "sydfirebaseproject-60fc3",
+    "storage_bucket": "sydfirebaseproject-60fc3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:28679631706:android:13771ca0ad6b23fb173963",
+        "android_client_info": {
+          "package_name": "com.example.syd"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "28679631706-f29qgg1266sde7l2uu65vgs93hfk0res.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.syd",
+            "certificate_hash": "26cceddba28901e9bae82cb0b32f302c85398de5"
+          }
+        },
+        {
+          "client_id": "28679631706-aoca8m7rp7iceg5sobhinfb087l9vhvr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0uGXQiU_X3Oz_SyCf9Bi5QKXBuCWHGho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "28679631706-aoca8m7rp7iceg5sobhinfb087l9vhvr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
