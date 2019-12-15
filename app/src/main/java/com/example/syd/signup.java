@@ -167,6 +167,20 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
                     member.setGender(gender);
                     dbreff.child(String.valueOf(maxId + 1)).setValue(member);
 
+
+
+                    mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                          if(task.isSuccessful()){
+                              Toast.makeText(getApplicationContext(),"Email verified", Toast.LENGTH_SHORT).show();
+                          }
+                          else{
+                              Toast.makeText(getApplicationContext(),task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                          }
+                        }
+                    });
+
                     Toast.makeText(getApplicationContext(), "User SignedUp successfully", Toast.LENGTH_SHORT).show();
 
                 } else {
