@@ -94,7 +94,6 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:visibility="visible" />
 
-    />
 
 
     <TextView
@@ -107,10 +106,24 @@
         android:layout_marginTop="500dp"
         android:background="#23776c"
         android:focusable="true"
-        android:text="SIGNUP HERE"
+        android:text="Sign Up HERE"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:visibility="visible" />
 
+    <TextView
+        android:id="@+id/textViewNutritionistSignup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="550dp"
+        android:background="#FFEB3B"
+        android:focusable="true"
+        android:text="Nutritionist? Sign UP Here"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:visibility="visible" />
 
 </RelativeLayout>

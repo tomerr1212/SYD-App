@@ -24,7 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class signup extends AppCompatActivity implements View.OnClickListener {
+public class customer_signup extends AppCompatActivity implements View.OnClickListener {
     ProgressBar progressBar;
     EditText editTextEmail, editTextName, editTextAge, editTextKG, editTextCM, editTextPassword, editTextConfirmPassword;
     RadioGroup radioGenderGroup;
@@ -40,7 +40,7 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
+        setContentView(R.layout.activity_customer_signup);
 
         editTextEmail = findViewById(R.id.editEmail);
         editTextName = findViewById(R.id.editName);
@@ -157,29 +157,17 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
                 if (task.isSuccessful()) {
                     int age = Integer.parseInt(editTextAge.getText().toString().trim());
                     String name = editTextName.getText().toString().trim();
-                    int weight = Integer.parseInt(editTextKG.getText().toString().trim());
-                    int height = Integer.parseInt(editTextCM.getText().toString().trim());
+                    double weight = Integer.parseInt(editTextKG.getText().toString().trim());
+                    double height = Integer.parseInt(editTextCM.getText().toString().trim());
                     System.out.println("Before Member");
                     member.setAge(age);
                     member.setName(name);
                     member.setWeight(weight);
                     member.setHeight(height);
                     member.setGender(gender);
+                    member.setUserID(maxId+1);
                     dbreff.child(String.valueOf(maxId + 1)).setValue(member);
 
-
-
-                    mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                          if(task.isSuccessful()){
-                              Toast.makeText(getApplicationContext(),"Email verified", Toast.LENGTH_SHORT).show();
-                          }
-                          else{
-                              Toast.makeText(getApplicationContext(),task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                          }
-                        }
-                    });
 
                     Toast.makeText(getApplicationContext(), "User SignedUp successfully", Toast.LENGTH_SHORT).show();
 
