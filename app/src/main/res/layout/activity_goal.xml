@@ -55,6 +55,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:background="#efe41f"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintBottom_toTopOf="@+id/editEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

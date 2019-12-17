@@ -37,5 +37,31 @@
         <item> Very heavy exercise (twice per day) </item>
     </string-array>
 
+    <string-array name="Breakfast">
+        <item> Egg </item>
+        <item> Cereal </item>
+        <item> Coffee </item>
+        <item> Protein shake </item>
+    </string-array>
+
+    <string-array name="Lunch">
+        <item> Rice </item>
+        <item> meat </item>
+        <item> Fish </item>
+        <item> Hamburger </item>
+    </string-array>
+
+    <string-array name="Snack">
+        <item> Chocolate cookie </item>
+        <item> Protein Bar </item>
+        <item> Apple </item>
+        <item> Banana </item>
+    </string-array>
+
+    <string-array name="Dinner">
+        <item> Eggs </item>
+        <item> Yogurt </item>
+        <item> Salad </item>
+    </string-array>
 
 </resources>

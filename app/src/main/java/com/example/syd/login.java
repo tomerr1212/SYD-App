@@ -58,21 +58,6 @@ public class login extends AppCompatActivity implements View.OnClickListener {
 
     }
 
-  //  @Override
-//    public void onStart() {
-//        super.onStart();
-//        // Check if user is signed in (non-null) and update UI accordingly.
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//
-//    }
-
-
-
-//    private void userLogin(){
-//        String email = editTextEmail.getText().toString().trim();
-//        String password = editTextPassword.getText().toString().trim();
-//        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener()
-//    }
 
     @Override
     public void onClick(View view){

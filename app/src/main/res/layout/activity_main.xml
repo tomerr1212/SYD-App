@@ -6,4 +6,63 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/buttonLogout"
+        android:layout_width="101dp"
+        android:layout_height="44dp"
+        android:text="Logout"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/SignUpheadline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="Welcome"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:background="#efe41f"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonCustomMenu"
+        android:layout_width="243dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="184dp"
+        android:text="Custom Menu"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SignUpheadline" />
+
+    <Button
+        android:id="@+id/buttonUpdateProfile"
+        android:layout_width="243dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="40dp"
+        android:text="Update Profile"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonBuiltInMenu" />
+
+    <Button
+        android:id="@+id/buttonBuiltInMenu"
+        android:layout_width="243dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="40dp"
+        android:text="Built-in menu"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonCustomMenu" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
