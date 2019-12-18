@@ -1,111 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignBottom="@+id/textViewSignup"
-        android:layout_marginBottom="-368dp"
-        android:alpha="0.6"
-        android:background="@drawable/background"/>
-
-    <TextView
-
-        style="@style/TextAppearance.AppCompat.Headline"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:layout_marginBottom="653dp"
-        android:fontFamily="serif-monospace"
-        android:gravity="center"
-        android:text="@string/app_name"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        android:id="@+id/txt" />
-
-
-
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/txt"
-        android:layout_marginTop="-500dp"
-        android:layout_marginEnd="70dp"
-        android:background="@drawable/shape"
-        android:padding="15dp"
-        android:hint="@string/UserName"
-        android:textColorHint="@color/colorAccent"
-        android:textColor="@color/colorAccent"
-        android:id="@+id/login_username"
-        android:singleLine="true"/>
-
-
-    <EditText
-        android:id="@+id/login_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txt"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="-440dp"
-        android:layout_marginEnd="70dp"
-        android:background="@drawable/shape"
-        android:hint="@string/Password"
-        android:inputType="textPassword"
-        android:padding="15dp"
-        android:singleLine="true"
-        android:textColor="@color/colorAccent"
-        android:textColorHint="@color/colorAccent" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="200dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/login_password"
-        android:text="Forget Password?"
-        android:textColor="@color/colorPrimaryDark"
-        android:background="#83ffffff"
-        android:layout_marginTop="10dp"
-        android:id="@+id/reset_password"
-        />
-
-
-    <Button
-        android:id="@+id/Login_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="400dp"
-        android:layout_marginStart="4dp"
-        android:layout_centerHorizontal="true"
-        android:backgroundTint="@color/turquoise"
-        android:text="@string/Login"
-        android:visibility="visible"
-         />
+    android:layout_height="match_parent">
 
 
     <TextView
-        android:id="@+id/textViewSignup"
-        android:layout_width="match_parent"
+        android:id="@+id/SignUpheadline"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="12dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="450dp"
-        android:background="#23776c"
-        android:focusable="true"
-        android:text="SIGNUP HERE"
+        android:layout_marginBottom="20dp"
+        android:text="Welcome"
         android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:visibility="visible" />
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:background="#efe41f"
+        app:layout_constraintBottom_toTopOf="@+id/editEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-</RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

@@ -16,6 +16,7 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:background="#efe41f"
         app:layout_constraintBottom_toTopOf="@+id/editEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -53,7 +54,7 @@
         android:id="@+id/editAge"
         android:layout_width="411dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="250dp"
+        android:layout_marginBottom="228dp"
         android:ems="10"
         android:hint="Age"
         android:inputType="text|number"
@@ -61,7 +62,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
-
 
     <EditText
         android:id="@+id/editPassword"
@@ -83,23 +83,27 @@
         android:ems="10"
         android:hint="Confirm Password"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/btnSignUP"
+        app:layout_constraintBottom_toTopOf="@+id/textViewSignUP2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/btnSignUP"
-        android:layout_width="411dp"
+    <TextView
+        android:id="@+id/textViewSignUP2"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="17dp"
+        android:background="#45a463"
         android:text="SIGNUP"
-        app:layout_constraintBottom_toTopOf="@+id/textViewLogin"
+        android:padding="15dp"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:layout_constraintBottom_toTopOf="@+id/textViewAlreadyLoggedIn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textViewLogin"
+        android:id="@+id/textViewAlreadyLoggedIn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="44dp"
@@ -189,15 +193,14 @@
             android:layout_width="match_parent"
             android:layout_height="33dp"
             android:text="Female"
-            android:onClick="checkButton"
-            android:checked="true"/>
+            android:buttonTint="@color/colorPrimaryDark"/>
 
         <RadioButton
             android:id="@+id/radioButtonMale"
             android:layout_width="match_parent"
             android:layout_height="33dp"
             android:text="Male"
-            android:onClick="checkButton"
+            android:buttonTint="@color/colorPrimaryDark"
             android:checked="true" />
 
     </RadioGroup>

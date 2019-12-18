@@ -47,8 +47,6 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
         editTextAge = findViewById(R.id.editAge);
 
         radioGenderGroup = findViewById(R.id.radioGenderGroup);
-
-
         editTextKG = findViewById(R.id.editTextKG);
         editTextCM = findViewById(R.id.editTextCM);
         editTextPassword = findViewById(R.id.editPassword);
@@ -66,25 +64,19 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
                     maxId = dataSnapshot.getChildrenCount();
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
 
-        findViewById(R.id.btnSignUP).setOnClickListener(this);
-        findViewById(R.id.textViewLogin).setOnClickListener(this);
+        findViewById(R.id.textViewSignUP2).setOnClickListener(this);
+        findViewById(R.id.textViewAlreadyLoggedIn).setOnClickListener(this);
     }
 
 
-//    public void checkButton(View view) {
-//        int radioID = radioGenderGroup.getCheckedRadioButtonId();
-//        radioButtonGender = findViewById(radioID);
-//        Toast.makeText(this, "Selected: "+radioButtonGender.getText(),Toast.LENGTH_SHORT).show();
-//    }
 
-    private void registerUser() {
+    private boolean registerUser() {
 
         String email = editTextEmail.getText().toString().trim();
         String name = editTextName.getText().toString().trim();
@@ -95,59 +87,65 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
         String cPaswword = editTextConfirmPassword.getText().toString().trim();
 
 
+        int selectedId = radioGenderGroup.getCheckedRadioButtonId();
+        // find the radiobutton by returned id
+        radioButtonGender = (RadioButton) findViewById(selectedId);
+        final String gender = (String)radioButtonGender.getText();
+
+
         if (email.isEmpty()) {
             editTextEmail.setError("Email is required");
             editTextEmail.requestFocus();
-            return;
+            return false;
         }
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             editTextEmail.setError("Please insert a valid Email");
             editTextEmail.requestFocus();
-            return;
+            return false;
         }
 
         if (name.isEmpty()) {
             editTextName.setError("Name is required");
             editTextName.requestFocus();
-            return;
+            return false;
         }
         if (age.isEmpty()) {
             editTextAge.setError("Age is required");
             editTextAge.requestFocus();
-            return;
+            return false;
         }
         if (KG.isEmpty()) {
             editTextAge.setError("Weight is required");
             editTextAge.requestFocus();
-            return;
+            return false;
         }
         if (CM.isEmpty()) {
             editTextAge.setError("Height is required");
             editTextAge.requestFocus();
-            return;
+            return false;
         }
         if (password.isEmpty()) {
             editTextPassword.setError("Password is required");
             editTextPassword.requestFocus();
-            return;
+            return false;
         }
         if (password.length() < 6) {
             editTextPassword.setError("Minimum length of password should be 6");
             editTextPassword.requestFocus();
-            return;
+            return false;
         }
 
         if (cPaswword.isEmpty()) {
             editTextConfirmPassword.setError("Please Confirm your password");
             editTextConfirmPassword.requestFocus();
-            return;
+            return false;
         }
 
         if (!password.matches(cPaswword)) {
             editTextConfirmPassword.setError("The password are not matched");
             editTextConfirmPassword.requestFocus();
-            return;
+            return false;
         }
 
         progressBar.setVisibility(View.VISIBLE);
@@ -165,10 +163,26 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
                     member.setAge(age);
                     member.setName(name);
                     member.setWeight(weight);
-                    member.setGender(radioButtonGender.getText().toString());
+                    member.setHeight(height);
+                    member.setGender(gender);
                     dbreff.child(String.valueOf(maxId + 1)).setValue(member);
 
+
+
+                    mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                          if(task.isSuccessful()){
+                              Toast.makeText(getApplicationContext(),"Email verified", Toast.LENGTH_SHORT).show();
+                          }
+                          else{
+                              Toast.makeText(getApplicationContext(),task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                          }
+                        }
+                    });
+
                     Toast.makeText(getApplicationContext(), "User SignedUp successfully", Toast.LENGTH_SHORT).show();
+
                 } else {
                     if (task.getException() instanceof FirebaseAuthUserCollisionException) {
                         Toast.makeText(getApplicationContext(), "You are already signed up", Toast.LENGTH_SHORT).show();
@@ -178,23 +192,23 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
             }
         });
 
-
+        return true;
     }
 
 
     @Override
     public void onClick(View view) {
 
-        boolean checked = ((RadioButton) view).isChecked();
+       // boolean checked = ( view).isChecked();
         switch (view.getId()) {
-            case R.id.btnSignUP:
-                registerUser();
-                startActivity(new Intent(this, MainActivity.class));
+            case R.id.textViewSignUP2:
+                if(registerUser())
+                    startActivity(new Intent(this, login.class));
                 break;
 
-            case R.id.textViewLogin:
-              //  finish();
-                startActivity(new Intent(this, Home.class));
+            case R.id.textViewAlreadyLoggedIn:
+                //  credential(log in details);
+                startActivity(new Intent(this, login.class));
                 break;
 
         }
