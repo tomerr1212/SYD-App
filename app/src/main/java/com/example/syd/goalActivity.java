@@ -56,7 +56,7 @@ public class goalActivity extends AppCompatActivity implements AdapterView.OnIte
 
         switch(v.getId()) {
             case R.id.textViewLetsGO:
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, MainActivity_Customer.class));
                 break;
 
         }

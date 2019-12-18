@@ -19,10 +19,10 @@ import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 import java.util.ArrayList;
 import java.util.List;
 
-public class built_in_menu extends AppCompatActivity implements  View.OnClickListener, IFirebaseLoadDone {
+public class nutritionist_meals extends AppCompatActivity implements  View.OnClickListener, IFirebaseLoadDone {
 
     DatabaseReference mealsRef;
-    SearchableSpinner searchableSpinnerBF;//searchableSpinnerLU,searchableSpinnerSN,searchableSpinnerDI;
+    SearchableSpinner searchableSpinnerBF,searchableSpinnerLU,searchableSpinnerSN,searchableSpinnerDI;
     IFirebaseLoadDone iFirebaseLoadDone;
     List<Meal> meals;
     @Override
@@ -31,9 +31,9 @@ public class built_in_menu extends AppCompatActivity implements  View.OnClickLis
         setContentView(R.layout.activity_built_in_menu);
 
         searchableSpinnerBF = findViewById(R.id.spinnerBreakfast);
-//        searchableSpinnerLU = findViewById(R.id.spinnerLunch);
-//        searchableSpinnerSN = findViewById(R.id.spinnerSnack);
-//        searchableSpinnerDI = findViewById(R.id.spinnerDinner);
+        searchableSpinnerLU = findViewById(R.id.spinnerLunch);
+        searchableSpinnerSN = findViewById(R.id.spinnerSnack);
+        searchableSpinnerDI = findViewById(R.id.spinnerDinner);
 
         mealsRef = FirebaseDatabase.getInstance().getReference("Meals");
 
@@ -54,7 +54,6 @@ public class built_in_menu extends AppCompatActivity implements  View.OnClickLis
             }
         });
 
-
         findViewById(R.id.buttonBack).setOnClickListener(this);
     }
 
@@ -62,9 +61,8 @@ public class built_in_menu extends AppCompatActivity implements  View.OnClickLis
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.buttonBack:
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, MainActivity_Customer.class));
                 break;
-
         }
     }
 
@@ -73,27 +71,35 @@ public class built_in_menu extends AppCompatActivity implements  View.OnClickLis
 
     public void onFirebaseLoadSuccess(List<Meal> mealList) {
         meals = mealList;
-        //Get all name
 
+        //Get all name
         List<String> breakfast_list = new ArrayList<>();
-//        List<String> lunch_list = new ArrayList<>();
-//        List<String> snacks_list = new ArrayList<>();
-//        List<String> dinner_list = new ArrayList<>();
+        List<String> lunch_list = new ArrayList<>();
+        List<String> snacks_list = new ArrayList<>();
+        List<String> dinner_list = new ArrayList<>();
+
 
         for(Meal meal:mealList){
+
+            if(meal.getType().equals("Breakfast"))
                 breakfast_list.add(meal.getName());
+            if(meal.getType().equals("Lunch"))
+                lunch_list.add(meal.getName());
+            if(meal.getType().equals("Snack"))
+                snacks_list.add(meal.getName());
+            if(meal.getType().equals("Dinner"))
+                dinner_list.add(meal.getName());
         }
         //create adapter and send for spinner
         ArrayAdapter<String>  adapterBF = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,breakfast_list);
-//        ArrayAdapter<String>  adapterLU = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,lunch_list);
-//        ArrayAdapter<String>  adapterSN = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,snacks_list);
-//        ArrayAdapter<String>  adapterDI = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,dinner_list);
+        ArrayAdapter<String>  adapterLU = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,lunch_list);
+        ArrayAdapter<String>  adapterSN = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,snacks_list);
+        ArrayAdapter<String>  adapterDI = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,dinner_list);
 
         searchableSpinnerBF.setAdapter(adapterBF);
-//        searchableSpinnerLU.setAdapter(adapterLU);
-//        searchableSpinnerSN.setAdapter(adapterSN);
-//        searchableSpinnerDI.setAdapter(adapterDI);
-
+        searchableSpinnerLU.setAdapter(adapterLU);
+        searchableSpinnerSN.setAdapter(adapterSN);
+        searchableSpinnerDI.setAdapter(adapterDI);
 
     }
 

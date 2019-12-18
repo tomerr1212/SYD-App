@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity_Customer extends AppCompatActivity {
 
     Button buttonCustomMenu;
     Button buttonBuiltInMenu;
@@ -26,28 +26,28 @@ public class MainActivity extends AppCompatActivity {
 
         buttonCustomMenu.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, custom_menu.class));
+                startActivity(new Intent(MainActivity_Customer.this, customer_meal.class));
             }
 
         });
 
         buttonBuiltInMenu.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, built_in_menu.class));
+                startActivity(new Intent(MainActivity_Customer.this, nutritionist_meals.class));
             }
 
         });
 
         buttonUpdateProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, built_in_menu.class));
+                startActivity(new Intent(MainActivity_Customer.this, nutritionist_meals.class));
             }
 
         });
 
         buttonLogout.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, login.class));
+                startActivity(new Intent(MainActivity_Customer.this, login.class));
             }
 
         });

@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class custom_menu extends AppCompatActivity {
+public class customer_meal extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
