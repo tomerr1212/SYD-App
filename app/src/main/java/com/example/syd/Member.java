@@ -3,7 +3,9 @@ package com.example.syd;
 public class Member {
 
     private String Name,Gender;
-    private int Age,Weight,Height;
+    private int Age;
+    private double Weight,Height;
+    private long UserID;
 
 
     public Member(){
@@ -34,19 +36,27 @@ public class Member {
         Gender = gender;
     }
 
-    public int getWeight() {
+    public double getWeight() {
         return Weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(double weight) {
         Weight = weight;
     }
 
-    public int getHeight() {
+    public double getHeight() {
         return Height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(double height) {
         Height = height;
+    }
+
+    public long getUserID() {
+        return UserID;
+    }
+
+    public void setUserID(long userID) {
+        UserID = userID;
     }
 }

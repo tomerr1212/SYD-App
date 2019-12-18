@@ -24,14 +24,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class signup extends AppCompatActivity implements View.OnClickListener {
+public class nutritionist_signup extends AppCompatActivity implements View.OnClickListener {
     ProgressBar progressBar;
-    EditText editTextEmail, editTextName, editTextAge, editTextKG, editTextCM, editTextPassword, editTextConfirmPassword;
+    EditText editTextEmail, editTextName, editTextAge, editTextYearsIfExpFill, editTextEducationFill, editTextPassword, editTextConfirmPassword;
     RadioGroup radioGenderGroup;
     RadioButton radioButtonGender;
 
 
-    Member member;
+    nutritionist nutritionist;
     long maxId = 0;
     private FirebaseAuth mAuth;
     DatabaseReference dbreff;
@@ -40,23 +40,23 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
+        setContentView(R.layout.activity_nutritionist_signup);
 
         editTextEmail = findViewById(R.id.editEmail);
         editTextName = findViewById(R.id.editName);
         editTextAge = findViewById(R.id.editAge);
 
         radioGenderGroup = findViewById(R.id.radioGenderGroup);
-        editTextKG = findViewById(R.id.editTextKG);
-        editTextCM = findViewById(R.id.editTextCM);
+        editTextYearsIfExpFill = findViewById(R.id.editTextYearsOfExpFill);
+        editTextEducationFill = findViewById(R.id.editTextEducationFill);
         editTextPassword = findViewById(R.id.editPassword);
         editTextConfirmPassword = findViewById(R.id.editConfirmPassword);
 
-        member = new Member();
+        nutritionist = new nutritionist();
         progressBar = findViewById(R.id.progressBar);
 
         mAuth = FirebaseAuth.getInstance();
-        dbreff = FirebaseDatabase.getInstance().getReference().child("Member");
+        dbreff = FirebaseDatabase.getInstance().getReference().child("nutritionist");
         dbreff.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -81,8 +81,8 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
         String email = editTextEmail.getText().toString().trim();
         String name = editTextName.getText().toString().trim();
         String age = editTextAge.getText().toString().trim();
-        String KG = editTextKG.getText().toString().trim();
-        String CM = editTextCM.getText().toString().trim();
+        String yearsOfExp = editTextYearsIfExpFill.getText().toString().trim();
+        final String education = editTextEducationFill.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
         String cPaswword = editTextConfirmPassword.getText().toString().trim();
 
@@ -115,14 +115,14 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
             editTextAge.requestFocus();
             return false;
         }
-        if (KG.isEmpty()) {
-            editTextAge.setError("Weight is required");
-            editTextAge.requestFocus();
+        if (yearsOfExp.isEmpty()) {
+            editTextYearsIfExpFill.setError("Years of experience is required");
+            editTextYearsIfExpFill.requestFocus();
             return false;
         }
-        if (CM.isEmpty()) {
-            editTextAge.setError("Height is required");
-            editTextAge.requestFocus();
+        if (education.isEmpty()) {
+            editTextEducationFill.setError("Education is required");
+            editTextEducationFill.requestFocus();
             return false;
         }
         if (password.isEmpty()) {
@@ -153,33 +153,21 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                progressBar.setVisibility(View.GONE);
+
                 if (task.isSuccessful()) {
                     int age = Integer.parseInt(editTextAge.getText().toString().trim());
                     String name = editTextName.getText().toString().trim();
-                    int weight = Integer.parseInt(editTextKG.getText().toString().trim());
-                    int height = Integer.parseInt(editTextCM.getText().toString().trim());
-                    System.out.println("Before Member");
-                    member.setAge(age);
-                    member.setName(name);
-                    member.setWeight(weight);
-                    member.setHeight(height);
-                    member.setGender(gender);
-                    dbreff.child(String.valueOf(maxId + 1)).setValue(member);
+                    int yearsOfExp = Integer.parseInt(editTextYearsIfExpFill.getText().toString().trim());
+                    String Education = editTextEducationFill.getText().toString().trim();
+                    System.out.println("Before nutritionist");
+                    nutritionist.setAge(age);
+                    nutritionist.setName(name);
+                    nutritionist.setYearsOfExp(yearsOfExp);
+                    nutritionist.setEducation(education);
+                    nutritionist.setGender(gender);
+                    nutritionist.setNutrID(maxId+1);
+                    dbreff.child(String.valueOf(maxId + 1)).setValue(nutritionist);
 
-
-
-                    mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                          if(task.isSuccessful()){
-                              Toast.makeText(getApplicationContext(),"Email verified", Toast.LENGTH_SHORT).show();
-                          }
-                          else{
-                              Toast.makeText(getApplicationContext(),task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                          }
-                        }
-                    });
 
                     Toast.makeText(getApplicationContext(), "User SignedUp successfully", Toast.LENGTH_SHORT).show();
 
@@ -191,7 +179,7 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
                 }
             }
         });
-
+        progressBar.setVisibility(View.GONE);
         return true;
     }
 
@@ -199,7 +187,7 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
 
-       // boolean checked = ( view).isChecked();
+        // boolean checked = ( view).isChecked();
         switch (view.getId()) {
             case R.id.textViewSignUP2:
                 if(registerUser())
