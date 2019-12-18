@@ -1,7 +1,7 @@
 package com.example.syd;
 
 public class Meal {
-    int type;
+    String type;
     String name;
     long calories;
 
@@ -9,7 +9,7 @@ public class Meal {
     public  Meal(){
     }
 
-    public Meal(long calories, int type, String name) {
+    public Meal(long calories, String type, String name) {
         this.calories = calories;
         this.type = type;
         this.name = name;
@@ -23,11 +23,11 @@ public class Meal {
         this.calories = calories;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 
