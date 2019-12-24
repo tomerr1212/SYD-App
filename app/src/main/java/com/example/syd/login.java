@@ -33,6 +33,7 @@ public class login extends AppCompatActivity implements View.OnClickListener {
         editTextPassword = findViewById(R.id.login_password);
         textViewLogin = findViewById(R.id.textViewLogin);
         findViewById(R.id.textViewSignup).setOnClickListener(this);
+        findViewById(R.id.textViewNutritionistLogin).setOnClickListener(this);
         findViewById(R.id.textViewNutritionistSignup).setOnClickListener(this);
         findViewById(R.id.textViewLogin).setOnClickListener(this);
         getWindow().setStatusBarColor(Color.WHITE);
@@ -69,6 +70,10 @@ public class login extends AppCompatActivity implements View.OnClickListener {
 
             case R.id.textViewNutritionistSignup:
                 startActivity(new Intent(this, nutritionist_signup.class));
+                break;
+
+            case R.id.textViewNutritionistLogin:
+                startActivity(new Intent(this, MainActivity_nutritionist.class));
                 break;
         }
 

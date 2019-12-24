@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity_nutritionist"></activity>
         <activity android:name=".customer_meal" />
         <activity android:name=".nutritionist_meals" />
         <activity android:name=".MainActivity_Customer" />
