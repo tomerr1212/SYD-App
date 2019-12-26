@@ -31,22 +31,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/buttonCustomMenu"
-        android:layout_width="243dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="184dp"
-        android:text="Custom Menu"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SignUpheadline" />
 
     <Button
         android:id="@+id/buttonUpdateProfile"
         android:layout_width="243dp"
         android:layout_height="57dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="60dp"
         android:text="Update Profile"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,12 +47,12 @@
         android:id="@+id/buttonBuiltInMenu"
         android:layout_width="243dp"
         android:layout_height="57dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="172dp"
         android:text="Built-in menu"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonCustomMenu" />
+        app:layout_constraintTop_toBottomOf="@+id/SignUpheadline" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

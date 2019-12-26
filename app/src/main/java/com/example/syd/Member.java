@@ -2,14 +2,21 @@ package com.example.syd;
 
 public class Member {
 
-    private String Name,Gender;
+    private String Name, Gender, email;
     private int Age;
-    private double Weight,Height;
-    private long UserID;
+    private double Weight, Height;
 
 
-    public Member(){
+    public Member() {
 
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getName() {
@@ -52,11 +59,6 @@ public class Member {
         Height = height;
     }
 
-    public long getUserID() {
-        return UserID;
-    }
-
-    public void setUserID(long userID) {
-        UserID = userID;
-    }
 }
+
+

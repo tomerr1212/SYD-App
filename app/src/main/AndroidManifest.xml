@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity_nutritionist"></activity>
         <activity android:name=".customer_meal" />
-        <activity android:name=".nutritionist_meals" />
+        <activity android:name=".built_in_meals" />
         <activity android:name=".MainActivity_Customer" />
         <activity android:name=".nutritionist_signup" />
         <activity android:name=".goalActivity" />

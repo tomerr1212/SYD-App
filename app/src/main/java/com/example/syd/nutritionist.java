@@ -2,13 +2,20 @@ package com.example.syd;
 
 public class nutritionist {
 
-    private String Name,Gender,Education;
+    private String Name,Gender,Education, email;
     private int Age, YearsOfExp;
-    private long NutrID;
 
 
     public nutritionist(){
 
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getEducation() {
@@ -51,14 +58,5 @@ public class nutritionist {
         Gender = gender;
     }
 
-
-
-    public long getNutrID() {
-        return NutrID;
-    }
-
-    public void setNutrID(long nutrID) {
-        NutrID = nutrID;
-    }
 
 }

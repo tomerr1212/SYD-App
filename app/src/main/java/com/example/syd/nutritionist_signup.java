@@ -18,11 +18,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class nutritionist_signup extends AppCompatActivity implements View.OnClickListener {
     ProgressBar progressBar;
@@ -32,7 +29,6 @@ public class nutritionist_signup extends AppCompatActivity implements View.OnCli
 
 
     nutritionist nutritionist;
-    long maxId = 0;
     private FirebaseAuth mAuth;
     DatabaseReference dbreff;
 
@@ -57,18 +53,7 @@ public class nutritionist_signup extends AppCompatActivity implements View.OnCli
 
         mAuth = FirebaseAuth.getInstance();
         dbreff = FirebaseDatabase.getInstance().getReference().child("nutritionist");
-        dbreff.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    maxId = dataSnapshot.getChildrenCount();
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
 
         findViewById(R.id.textViewSignUP2).setOnClickListener(this);
         findViewById(R.id.textViewAlreadyLoggedIn).setOnClickListener(this);
@@ -78,7 +63,7 @@ public class nutritionist_signup extends AppCompatActivity implements View.OnCli
 
     private boolean registerUser() {
 
-        String email = editTextEmail.getText().toString().trim();
+        final String email = editTextEmail.getText().toString().trim();
         String name = editTextName.getText().toString().trim();
         String age = editTextAge.getText().toString().trim();
         String yearsOfExp = editTextYearsIfExpFill.getText().toString().trim();
@@ -160,13 +145,13 @@ public class nutritionist_signup extends AppCompatActivity implements View.OnCli
                     int yearsOfExp = Integer.parseInt(editTextYearsIfExpFill.getText().toString().trim());
                     String Education = editTextEducationFill.getText().toString().trim();
                     System.out.println("Before nutritionist");
+                    nutritionist.setEmail(email);
                     nutritionist.setAge(age);
                     nutritionist.setName(name);
                     nutritionist.setYearsOfExp(yearsOfExp);
                     nutritionist.setEducation(education);
                     nutritionist.setGender(gender);
-                    nutritionist.setNutrID(maxId+1);
-                    dbreff.child(String.valueOf(maxId + 1)).setValue(nutritionist);
+                    dbreff.child(mAuth.getUid()).setValue(nutritionist);
 
 
                     Toast.makeText(getApplicationContext(), "User SignedUp successfully", Toast.LENGTH_SHORT).show();

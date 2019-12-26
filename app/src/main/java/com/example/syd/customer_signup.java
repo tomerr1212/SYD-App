@@ -18,11 +18,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class customer_signup extends AppCompatActivity implements View.OnClickListener {
     ProgressBar progressBar;
@@ -32,7 +29,6 @@ public class customer_signup extends AppCompatActivity implements View.OnClickLi
 
 
     Member member;
-    long maxId = 0;
     private FirebaseAuth mAuth;
     DatabaseReference dbreff;
 
@@ -57,18 +53,6 @@ public class customer_signup extends AppCompatActivity implements View.OnClickLi
 
         mAuth = FirebaseAuth.getInstance();
         dbreff = FirebaseDatabase.getInstance().getReference().child("Member");
-        dbreff.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    maxId = dataSnapshot.getChildrenCount();
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
 
         findViewById(R.id.textViewSignUP2).setOnClickListener(this);
         findViewById(R.id.textViewAlreadyLoggedIn).setOnClickListener(this);
@@ -78,7 +62,7 @@ public class customer_signup extends AppCompatActivity implements View.OnClickLi
 
     private boolean registerUser() {
 
-        String email = editTextEmail.getText().toString().trim();
+        final String email = editTextEmail.getText().toString().trim();
         String name = editTextName.getText().toString().trim();
         String age = editTextAge.getText().toString().trim();
         String KG = editTextKG.getText().toString().trim();
@@ -160,13 +144,13 @@ public class customer_signup extends AppCompatActivity implements View.OnClickLi
                     double weight = Integer.parseInt(editTextKG.getText().toString().trim());
                     double height = Integer.parseInt(editTextCM.getText().toString().trim());
                     System.out.println("Before Member");
+                    member.setEmail(email);
                     member.setAge(age);
                     member.setName(name);
                     member.setWeight(weight);
                     member.setHeight(height);
                     member.setGender(gender);
-                    member.setUserID(maxId+1);
-                    dbreff.child(String.valueOf(maxId + 1)).setValue(member);
+                    dbreff.child(mAuth.getUid()).setValue(member);
 
 
                     Toast.makeText(getApplicationContext(), "User SignedUp successfully", Toast.LENGTH_SHORT).show();

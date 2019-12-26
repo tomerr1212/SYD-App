@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignBottom="@+id/textViewSignup"
-        android:layout_marginBottom="-368dp"
+        android:layout_marginBottom="-190dp"
         android:alpha="0.6"
         android:background="@drawable/background"/>
 
@@ -126,19 +126,6 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:visibility="visible" />
 
-    <TextView
-        android:id="@+id/textViewNutritionistLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="12dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="600dp"
-        android:background="#d1fB3B"
-        android:focusable="true"
-        android:text="Nutritionist? Login Here"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:visibility="visible" />
+
 
 </RelativeLayout>

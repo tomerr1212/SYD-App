@@ -19,28 +19,22 @@ public class MainActivity_Customer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        buttonCustomMenu = findViewById(R.id.buttonCustomMenu);
         buttonBuiltInMenu = findViewById(R.id.buttonBuiltInMenu);
         buttonUpdateProfile = findViewById(R.id.buttonUpdateProfile);
         buttonLogout = findViewById(R.id.buttonLogout);
 
-        buttonCustomMenu.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity_Customer.this, customer_meal.class));
-            }
 
-        });
 
         buttonBuiltInMenu.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity_Customer.this, nutritionist_meals.class));
+                startActivity(new Intent(MainActivity_Customer.this, built_in_meals.class));
             }
 
         });
 
         buttonUpdateProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity_Customer.this, nutritionist_meals.class));
+                startActivity(new Intent(MainActivity_Customer.this, built_in_meals.class));
             }
 
         });

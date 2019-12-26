@@ -33,7 +33,6 @@ public class login extends AppCompatActivity implements View.OnClickListener {
         editTextPassword = findViewById(R.id.login_password);
         textViewLogin = findViewById(R.id.textViewLogin);
         findViewById(R.id.textViewSignup).setOnClickListener(this);
-        findViewById(R.id.textViewNutritionistLogin).setOnClickListener(this);
         findViewById(R.id.textViewNutritionistSignup).setOnClickListener(this);
         findViewById(R.id.textViewLogin).setOnClickListener(this);
         getWindow().setStatusBarColor(Color.WHITE);
@@ -46,7 +45,11 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            startActivity(new Intent(login.this, goalActivity.class));
+                            if(editTextEmail.getText().toString().contains("admin")){
+                                startActivity(new Intent(login.this, MainActivity_nutritionist.class));
+                            }
+                            else
+                                startActivity(new Intent(login.this, goalActivity.class));
                         }else{
                             Toast.makeText(login.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                         }
@@ -72,9 +75,6 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                 startActivity(new Intent(this, nutritionist_signup.class));
                 break;
 
-            case R.id.textViewNutritionistLogin:
-                startActivity(new Intent(this, MainActivity_nutritionist.class));
-                break;
         }
 
     }
