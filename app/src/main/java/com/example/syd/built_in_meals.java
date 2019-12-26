@@ -3,11 +3,13 @@ package com.example.syd;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.syd.Interface.IFirebaseLoadDoneM;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -35,8 +37,34 @@ public class built_in_meals extends AppCompatActivity implements IFirebaseLoadDo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_built_in_meals);
 
+        textViewBFData = findViewById(R.id.textViewBFData);
+        textViewLunchData = findViewById(R.id.textViewLunchData);
+        textViewSNData = findViewById(R.id.textViewSNData);
+        textViewDIData = findViewById(R.id.textViewDIData);
+
+
         searchableSpinnerMenus = findViewById(R.id.searchableSpinnerMenus);
 
+
+        searchableSpinnerMenus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
+                String selectedItem = parent.getItemAtPosition(position).toString();
+                Log.println(Log.ERROR,"Tagging Size", selectedItem);
+
+                textViewBFData.setText(menus.get(position).getBreakfast());
+                textViewLunchData.setText(menus.get(position).getLunch());
+                textViewSNData.setText(menus.get(position).getSnack());
+                textViewDIData.setText(menus.get(position).getDinner());
+
+
+            } // to close the onItemSelected
+            public void onNothingSelected(AdapterView<?> parent)
+            {
+
+            }
+        });
 
         dbreff = FirebaseDatabase.getInstance().getReference().child("Menu");
         iFirebaseLoadDoneM = this;
@@ -71,17 +99,14 @@ public class built_in_meals extends AppCompatActivity implements IFirebaseLoadDo
         menus = menusList;
 
         List<String> mealsBF_list = new ArrayList<>();
-//        List<String> mealsLU_list = new ArrayList<>();
-//        List<String> mealsSN_list = new ArrayList<>();
-//        List<String> mealsDI_list = new ArrayList<>();
+        List<String> mealsLU_list = new ArrayList<>();
+        List<String> mealsSN_list = new ArrayList<>();
+        List<String> mealsDI_list = new ArrayList<>();
 
-        Log.println(Log.ERROR,"Tagging Size", String.valueOf(menusList.size()));
 
-        Log.d("myTag", "This is my message");
         for (int i =0;i<menusList.size(); i++) {
-            Log.println(Log.ERROR,"Tagging Obj", menusList.get(i).getBreakfast());
 
-            mealsBF_list.add(menusList.get(i).getBreakfast());
+            mealsBF_list.add(""+i);
 //            mealsLU_list.add(menusList.get(i).getLunch());
 //            mealsSN_list.add(menusList.get(i).getSnack());
 //            mealsDI_list.add(menusList.get(i).getDinner());
@@ -91,7 +116,6 @@ public class built_in_meals extends AppCompatActivity implements IFirebaseLoadDo
         Log.println(Log.ERROR,"Tagging Arr", adapterBF.getItem(1));
 
         searchableSpinnerMenus.setAdapter(adapterBF);
-
 
 
     }

@@ -70,8 +70,8 @@ public class MainActivity_nutritionist extends AppCompatActivity implements  Vie
         });
 
 
-        findViewById(R.id.buttonBack2).setOnClickListener(this);
-        findViewById(R.id.buttonKeepMenu).setOnClickListener(this);
+        findViewById(R.id.buttonBack).setOnClickListener(this);
+        findViewById(R.id.buttonSave).setOnClickListener(this);
     }
 
     @Override
