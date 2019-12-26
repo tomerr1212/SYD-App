@@ -2,6 +2,7 @@ package com.example.syd;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
@@ -93,12 +94,11 @@ public class MainActivity_nutritionist extends AppCompatActivity implements  Vie
 
         readymenu = new readyMenu();
         String breakfast = searchableSpinnerBF.getItemAtPosition(searchableSpinnerBF.getSelectedItemPosition()).toString();
-        String lunch = searchableSpinnerLU.getItemAtPosition(searchableSpinnerBF.getSelectedItemPosition()).toString();
-        String snack = searchableSpinnerSN.getItemAtPosition(searchableSpinnerBF.getSelectedItemPosition()).toString();
-        String dinner = searchableSpinnerDI.getItemAtPosition(searchableSpinnerBF.getSelectedItemPosition()).toString();
+        String lunch = searchableSpinnerLU.getItemAtPosition(searchableSpinnerLU.getSelectedItemPosition()).toString();
+        String snack = searchableSpinnerSN.getItemAtPosition(searchableSpinnerSN.getSelectedItemPosition()).toString();
+        String dinner = searchableSpinnerDI.getItemAtPosition(searchableSpinnerDI.getSelectedItemPosition()).toString();
         //double caloriesSum = Double.parseDouble(calorieSum.getText().toString().trim());
-        double caloriesSum =100;
-
+        double caloriesSum = Math.random()*300;
         String author = mAuth.getCurrentUser().getUid();
 
 
@@ -108,9 +108,9 @@ public class MainActivity_nutritionist extends AppCompatActivity implements  Vie
         readymenu.setDinner(dinner);
         readymenu.setAuthor(author);
         readymenu.setSum(caloriesSum);
+        Log.println(Log.ERROR,"Tagging readymenu", readymenu.toString());
 
         dbreff.push().setValue(readymenu);
-
 
     }
 

@@ -98,21 +98,16 @@ public class built_in_meals extends AppCompatActivity implements IFirebaseLoadDo
     public void onFirebaseLoadSuccess(List<readyMenu> menusList) {
         menus = menusList;
 
-        List<String> mealsBF_list = new ArrayList<>();
-        List<String> mealsLU_list = new ArrayList<>();
-        List<String> mealsSN_list = new ArrayList<>();
-        List<String> mealsDI_list = new ArrayList<>();
+        List<String> menus_id_list = new ArrayList<>();
 
 
         for (int i =0;i<menusList.size(); i++) {
 
-            mealsBF_list.add(""+i);
-//            mealsLU_list.add(menusList.get(i).getLunch());
-//            mealsSN_list.add(menusList.get(i).getSnack());
-//            mealsDI_list.add(menusList.get(i).getDinner());
+            menus_id_list.add(""+i);
+
         }
 
-        ArrayAdapter<String> adapterBF = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,mealsBF_list);
+        ArrayAdapter<String> adapterBF = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,menus_id_list);
         Log.println(Log.ERROR,"Tagging Arr", adapterBF.getItem(1));
 
         searchableSpinnerMenus.setAdapter(adapterBF);

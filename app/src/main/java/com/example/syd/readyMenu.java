@@ -53,15 +53,25 @@ public class readyMenu {
         return sum;
     }
 
-    public static void setSum(double sum) {
-        sum = sum;
-    }
+    public  void setSum(double sum) { this.sum = sum; }
 
     public String getAuthor() {
         return author;
     }
 
-    public static void setAuthor(String author) {
-        author = author;
+    public  void setAuthor(String author) {
+        this.author = author;
+    }
+
+    @Override
+    public String toString() {
+        return "readyMenu{" +
+                "breakfast='" + breakfast + '\'' +
+                ", lunch='" + lunch + '\'' +
+                ", snack='" + snack + '\'' +
+                ", dinner='" + dinner + '\'' +
+                ", sum=" + sum +
+                ", author='" + author + '\'' +
+                '}';
     }
 }
