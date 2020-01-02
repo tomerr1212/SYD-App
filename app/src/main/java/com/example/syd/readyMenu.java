@@ -1,21 +1,16 @@
 package com.example.syd;
 
 public class readyMenu {
-    String breakfast,lunch,snack,dinner;
+    String breakfast,lunch,snack,dinner,menuname;
     double sum;
     String author;
 
 
     public readyMenu(){ }
 
-    public readyMenu(String breakfast, String lunch, String snack, String dinner, double sum, String author) {
-        this.breakfast = breakfast;
-        this.lunch = lunch;
-        this.snack = snack;
-        this.dinner = dinner;
-        this.sum = sum;
-        this.author = author;
-    }
+    public String getMenuname() { return menuname;  }
+
+    public void setMenuname(String menuname) { this.menuname = menuname; }
 
     public String getBreakfast() {
         return breakfast;

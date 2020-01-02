@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,23 +22,19 @@ import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 import java.util.ArrayList;
 import java.util.List;
 
-public class built_in_meals extends AppCompatActivity implements IFirebaseLoadDoneM {
+public class customer_my_menus extends AppCompatActivity implements IFirebaseLoadDoneM, View.OnClickListener {
 
     TextView textViewBFData,textViewLunchData,textViewSNData,textViewDIData,textViewSumNum,textViewGoalNum;
     SearchableSpinner searchableSpinnerMenus;
     private FirebaseAuth mAuth;
     DatabaseReference menusRef,memberReff,dbreff;
     List<readyMenu> menus;
-    List<String>customerMenus = new ArrayList<>();
     IFirebaseLoadDoneM iFirebaseLoadDoneM;
-    Button buttonKeepMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_built_in_meals);
-
-
 
         textViewBFData = findViewById(R.id.textViewBFData);
         textViewLunchData = findViewById(R.id.textViewLunchData);
@@ -47,19 +42,6 @@ public class built_in_meals extends AppCompatActivity implements IFirebaseLoadDo
         textViewDIData = findViewById(R.id.textViewDIData);
         textViewSumNum = findViewById(R.id.textViewSumNum);
         textViewGoalNum=findViewById(R.id.textViewGoalNum);
-
-        buttonKeepMenu = findViewById(R.id.buttonKeepMenu);
-
-        buttonKeepMenu.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if(!customerMenus.contains(searchableSpinnerMenus.getSelectedItem().toString()))
-                    customerMenus.add(searchableSpinnerMenus.getSelectedItem().toString());
-
-                memberReff.child(mAuth.getCurrentUser().getUid()).child("my_menus")
-                        .setValue(customerMenus.toString());
-            }
-
-        });
 
         searchableSpinnerMenus = findViewById(R.id.searchableSpinnerMenus);
 
@@ -91,7 +73,9 @@ public class built_in_meals extends AppCompatActivity implements IFirebaseLoadDo
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 textViewGoalNum.setText(dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("BMR").getValue().toString());
-
+//                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+//
+//                }
             }
 
             @Override
@@ -123,8 +107,8 @@ public class built_in_meals extends AppCompatActivity implements IFirebaseLoadDo
 
 
 
-//        findViewById(R.id.buttonBack2).setOnClickListener(this);
-//        findViewById(R.id.buttonKeepMenu).setOnClickListener(this);
+        findViewById(R.id.buttonBack2).setOnClickListener(this);
+        findViewById(R.id.buttonKeepMenu).setOnClickListener(this);
     }
 
 
@@ -136,7 +120,7 @@ public class built_in_meals extends AppCompatActivity implements IFirebaseLoadDo
 
 
         for (int i =0;i<menusList.size(); i++) {
-            menus_id_list.add(menus.get(i).getMenuname());
+            menus_id_list.add(""+i);
         }
 
         ArrayAdapter<String> adapterBF = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,menus_id_list);
@@ -150,5 +134,8 @@ public class built_in_meals extends AppCompatActivity implements IFirebaseLoadDo
 
     }
 
+    @Override
+    public void onClick(View v) {
 
+    }
 }

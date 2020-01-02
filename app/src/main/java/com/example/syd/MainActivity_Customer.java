@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity_Customer extends AppCompatActivity {
 
-    Button buttonCustomMenu;
+    Button buttonMyMenus;
     Button buttonBuiltInMenu;
     Button buttonUpdateProfile;
     Button buttonLogout;
@@ -17,12 +17,12 @@ public class MainActivity_Customer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_customer_main);
 
         buttonBuiltInMenu = findViewById(R.id.buttonBuiltInMenu);
         buttonUpdateProfile = findViewById(R.id.buttonUpdateProfile);
         buttonLogout = findViewById(R.id.buttonLogout);
-
+        buttonMyMenus = findViewById(R.id.buttonMyMenus);
 
 
         buttonBuiltInMenu.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +45,12 @@ public class MainActivity_Customer extends AppCompatActivity {
             }
 
         });
+        buttonMyMenus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity_Customer.this, customer_my_menus.class));
+            }
 
+        });
     }
 
 

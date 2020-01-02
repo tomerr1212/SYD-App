@@ -19,62 +19,141 @@
         android:id="@+id/textViewSumNum"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="188dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="176dp"
+        android:gravity="center"
         android:text=""
+        android:textColor="#536DFE"
+        android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.817"
-        app:layout_constraintStart_toEndOf="@+id/textViewCalNum"
+        app:layout_constraintHorizontal_bias="1.0"
+
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textSum" />
 
     <TextView
         android:id="@+id/textSum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="204dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="192dp"
+        android:gravity="center"
         android:text="Sum"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.521"
-        app:layout_constraintStart_toEndOf="@+id/textCalories"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <EditText
+        android:id="@+id/editTextMenuName"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="176dp"
+        android:gravity="center"
+        android:hint="Insert menu name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewSN"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="Snack"
+        android:textSize="16dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="#D7583D"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerLunch" />
 
     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
         android:id="@+id/spinnerBreakfast"
         android:layout_width="300dp"
         android:layout_height="45dp"
-        android:layout_marginTop="224dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewBF" />
+
+    <TextView
+        android:id="@+id/textViewLU"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="Lunch"
+        android:textSize="16dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="#D7583D"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerBreakfast" />
 
     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
         android:id="@+id/spinnerLunch"
         android:layout_width="300dp"
         android:layout_height="45dp"
-        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerBreakfast" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewLU" />
+
+    <TextView
+        android:id="@+id/textViewBF"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="144dp"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="Breakfast"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="#D7583D"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSumNum" />
 
     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
         android:id="@+id/spinnerSnack"
         android:layout_width="300dp"
         android:layout_height="45dp"
-        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerLunch" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewSN" />
+
+    <TextView
+        android:id="@+id/textViewDI"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:padding="15dp"
+        android:textSize="16dp"
+        android:text="Dinner"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="#D7583D"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerSnack" />
 
     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
         android:id="@+id/spinnerDinner"
         android:layout_width="300dp"
         android:layout_height="45dp"
-        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerSnack" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewDI" />
 
     <Button
         android:id="@+id/buttonBack"

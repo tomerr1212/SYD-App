@@ -3,23 +3,23 @@ package com.example.syd;
 public class Meal {
     String type;
     String name;
-    long calories;
+    double calories;
 
 
     public  Meal(){
     }
 
-    public Meal(long calories, String type, String name) {
+    public Meal(double calories, String type, String name) {
         this.calories = calories;
         this.type = type;
         this.name = name;
     }
 
-    public long getCalories() {
+    public double getCalories() {
         return calories;
     }
 
-    public void setCalories(long calories) {
+    public void setCalories(double calories) {
         this.calories = calories;
     }
 

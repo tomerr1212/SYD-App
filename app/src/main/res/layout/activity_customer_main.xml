@@ -20,12 +20,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
+        android:background="#efe41f"
         android:text="Welcome"
         android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:background="#efe41f"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +41,7 @@
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonBuiltInMenu" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonMyMenus" />
 
     <Button
         android:id="@+id/buttonBuiltInMenu"
@@ -54,5 +54,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SignUpheadline" />
 
+    <Button
+        android:id="@+id/buttonMyMenus"
+        android:layout_width="243dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="60dp"
+        android:text="My Menus"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonBuiltInMenu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

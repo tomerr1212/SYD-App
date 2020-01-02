@@ -2,9 +2,10 @@ package com.example.syd;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,29 +28,89 @@ public class MainActivity_nutritionist extends AppCompatActivity implements  Vie
 
 
     readyMenu readymenu;
-    DatabaseReference mealsRef;
     SearchableSpinner searchableSpinnerBF,searchableSpinnerLU,searchableSpinnerSN,searchableSpinnerDI;
-    TextView calorieSum;
+    TextView textViewSumNum;
+    EditText editTextMenuName;
     IFirebaseLoadDone iFirebaseLoadDone;
     List<Meal> meals;
     private FirebaseAuth mAuth;
-    DatabaseReference dbreff;
-
+    DatabaseReference dbreff,mealsRef;
+    List<Double> calories = new ArrayList<>();
+    double bfCalorieSum=0,luCalorieSum=0,snCalorieSum=0,diCalorieSum=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_nutritionist);
-
         dbreff = FirebaseDatabase.getInstance().getReference().child("Menu");
-
         mAuth = FirebaseAuth.getInstance();
-        calorieSum = findViewById(R.id.textViewSumNum);
+
+        textViewSumNum = findViewById(R.id.textViewSumNum);
+        editTextMenuName = findViewById(R.id.editTextMenuName);
 
         searchableSpinnerBF = findViewById(R.id.spinnerBreakfast);
         searchableSpinnerLU = findViewById(R.id.spinnerLunch);
         searchableSpinnerSN = findViewById(R.id.spinnerSnack);
         searchableSpinnerDI = findViewById(R.id.spinnerDinner);
+
+        searchableSpinnerBF.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            public void onItemSelected(AdapterView<?> arg0, View view, int position, long id) {
+                String bf = searchableSpinnerBF.getSelectedItem().toString();
+                bfCalorieSum =0;
+                for(Meal meal:meals) {
+                    if (meal.getName().equals(bf))
+                        bfCalorieSum = meal.getCalories();
+                }
+                textViewSumNum.setText(Double.toString(bfCalorieSum + luCalorieSum + snCalorieSum + diCalorieSum));
+            }
+            public void onNothingSelected(AdapterView<?> arg0) { }
+        });
+        searchableSpinnerLU.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            public void onItemSelected(AdapterView<?> arg0, View view, int position, long id) {
+                String lu = searchableSpinnerLU.getSelectedItem().toString();
+                luCalorieSum =0;
+
+                for(Meal meal:meals) {
+                    if (meal.getName().equals(lu))
+                        luCalorieSum = meal.getCalories();
+                }
+
+                textViewSumNum.setText(Double.toString(bfCalorieSum + luCalorieSum + snCalorieSum + diCalorieSum));
+            }
+            public void onNothingSelected(AdapterView<?> arg0) { }
+        });
+        searchableSpinnerSN.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            public void onItemSelected(AdapterView<?> arg0, View view, int position, long id) {
+                String sn = searchableSpinnerSN.getSelectedItem().toString();
+                snCalorieSum =0;
+
+                for(Meal meal:meals) {
+                    if (meal.getName().equals(sn))
+                        snCalorieSum = meal.getCalories();
+                }
+
+                textViewSumNum.setText(Double.toString(bfCalorieSum + luCalorieSum + snCalorieSum + diCalorieSum));
+            }
+            public void onNothingSelected(AdapterView<?> arg0) { }
+        });
+        searchableSpinnerDI.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            public void onItemSelected(AdapterView<?> arg0, View view, int position, long id) {
+                String di = searchableSpinnerDI.getSelectedItem().toString();
+                diCalorieSum =0;
+
+                for(Meal meal:meals) {
+                    if (meal.getName().equals(di))
+                        diCalorieSum = meal.getCalories();
+                }
+
+                textViewSumNum.setText(Double.toString(bfCalorieSum + luCalorieSum + snCalorieSum + diCalorieSum));
+            }
+            public void onNothingSelected(AdapterView<?> arg0) { }
+        });
 
 
         mealsRef = FirebaseDatabase.getInstance().getReference("Meals");
@@ -57,10 +118,11 @@ public class MainActivity_nutritionist extends AppCompatActivity implements  Vie
         mealsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                List<Meal> meals = new ArrayList<>();
+                meals = new ArrayList<>();
                 for(DataSnapshot mealSnapshot:dataSnapshot.getChildren()){
                     meals.add(mealSnapshot.getValue(Meal.class));
                 }
+
                 iFirebaseLoadDone.onFirebaseLoadSuccess(meals);
             }
 
@@ -79,7 +141,7 @@ public class MainActivity_nutritionist extends AppCompatActivity implements  Vie
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.buttonBack:
-                startActivity(new Intent(this, MainActivity_Customer.class));
+                startActivity(new Intent(this, login.class));
                 break;
 
 
@@ -97,8 +159,8 @@ public class MainActivity_nutritionist extends AppCompatActivity implements  Vie
         String lunch = searchableSpinnerLU.getItemAtPosition(searchableSpinnerLU.getSelectedItemPosition()).toString();
         String snack = searchableSpinnerSN.getItemAtPosition(searchableSpinnerSN.getSelectedItemPosition()).toString();
         String dinner = searchableSpinnerDI.getItemAtPosition(searchableSpinnerDI.getSelectedItemPosition()).toString();
-        //double caloriesSum = Double.parseDouble(calorieSum.getText().toString().trim());
-        double caloriesSum = Math.random()*300;
+
+
         String author = mAuth.getCurrentUser().getUid();
 
 
@@ -107,9 +169,8 @@ public class MainActivity_nutritionist extends AppCompatActivity implements  Vie
         readymenu.setSnack(snack);
         readymenu.setDinner(dinner);
         readymenu.setAuthor(author);
-        readymenu.setSum(caloriesSum);
-        Log.println(Log.ERROR,"Tagging readymenu", readymenu.toString());
-
+        readymenu.setSum(bfCalorieSum+luCalorieSum+snCalorieSum+diCalorieSum);
+        readymenu.setMenuname(editTextMenuName.getText().toString());
         dbreff.push().setValue(readymenu);
 
     }
@@ -137,6 +198,7 @@ public class MainActivity_nutritionist extends AppCompatActivity implements  Vie
                 snacks_list.add(meal.getName());
             if(meal.getType().equals("Dinner"))
                 dinner_list.add(meal.getName());
+            calories.add(meal.getCalories());
         }
         //create adapter and send for spinner
         ArrayAdapter<String>  adapterBF = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,breakfast_list);
