@@ -34,7 +34,7 @@ public class MainActivity_Customer extends AppCompatActivity {
 
         buttonUpdateProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity_Customer.this, built_in_meals.class));
+                startActivity(new Intent(MainActivity_Customer.this, customer_update_profile.class));
             }
 
         });

@@ -150,5 +150,4 @@ public class built_in_meals extends AppCompatActivity implements IFirebaseLoadDo
 
     }
 
-
 }

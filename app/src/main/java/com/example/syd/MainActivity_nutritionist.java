@@ -1,5 +1,8 @@
 package com.example.syd;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -38,10 +41,13 @@ public class MainActivity_nutritionist extends AppCompatActivity implements  Vie
     List<Double> calories = new ArrayList<>();
     double bfCalorieSum=0,luCalorieSum=0,snCalorieSum=0,diCalorieSum=0;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_nutritionist);
+
+
         dbreff = FirebaseDatabase.getInstance().getReference().child("Menu");
         mAuth = FirebaseAuth.getInstance();
 
@@ -152,6 +158,7 @@ public class MainActivity_nutritionist extends AppCompatActivity implements  Vie
         }
     }
 
+
     private void savingMenu() {
 
         readymenu = new readyMenu();
@@ -174,10 +181,17 @@ public class MainActivity_nutritionist extends AppCompatActivity implements  Vie
         dbreff.push().setValue(readymenu);
 
     }
+    String tittle="New menu added";
+    String subject="Testing";
+    String body="Dinner";
+
+    NotificationManager notif=(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+    Notification notify=new Notification.Builder
+            (getApplicationContext()).setContentTitle(tittle).setContentText(body).
+            setContentTitle(subject).setSmallIcon(R.drawable.common_google_signin_btn_icon_dark).build();
+
 
     @Override
-
-
     public void onFirebaseLoadSuccess(List<Meal> mealList) {
         meals = mealList;
 

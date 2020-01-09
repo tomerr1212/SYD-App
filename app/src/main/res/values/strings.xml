@@ -22,6 +22,8 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="channel_name">Test</string>
+    <string name="channel_description">this is test</string>
 
     <string-array name="weekly_goal">
         <item> 0.25 </item>
