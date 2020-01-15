@@ -143,18 +143,12 @@ public class MainActivity_nutritionist extends AppCompatActivity implements  Vie
             }
         });
 
-        findViewById(R.id.buttonBack).setOnClickListener(this);
         findViewById(R.id.buttonSave).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch(v.getId()) {
-            case R.id.buttonBack:
-                startActivity(new Intent(this, login.class));
-                break;
-
-
             case R.id.buttonSave:
                 savingMenu();
                 Toast.makeText(getApplicationContext(), "readyMenu Saved Successfully", Toast.LENGTH_SHORT).show();

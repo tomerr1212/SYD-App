@@ -1,5 +1,6 @@
 package com.example.syd;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,7 +24,7 @@ import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 import java.util.ArrayList;
 import java.util.List;
 
-public class built_in_meals extends AppCompatActivity implements IFirebaseLoadDoneM {
+public class built_in_meals extends AppCompatActivity implements IFirebaseLoadDoneM,View.OnClickListener {
 
     TextView textViewBFData,textViewLunchData,textViewSNData,textViewDIData,textViewSumNum,textViewGoalNum;
     SearchableSpinner searchableSpinnerMenus;
@@ -32,7 +33,7 @@ public class built_in_meals extends AppCompatActivity implements IFirebaseLoadDo
     List<readyMenu> menus;
     List<String>customerMenus = new ArrayList<>();
     IFirebaseLoadDoneM iFirebaseLoadDoneM;
-    Button buttonKeepMenu;
+    Button buttonKeepMenu,buttonBack2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,8 @@ public class built_in_meals extends AppCompatActivity implements IFirebaseLoadDo
             }
 
         });
+
+        buttonBack2 = findViewById(R.id.buttonBack2);
 
         searchableSpinnerMenus = findViewById(R.id.searchableSpinnerMenus);
 
@@ -91,7 +94,6 @@ public class built_in_meals extends AppCompatActivity implements IFirebaseLoadDo
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 textViewGoalNum.setText(dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("BMR").getValue().toString());
-
             }
 
             @Override
@@ -150,4 +152,11 @@ public class built_in_meals extends AppCompatActivity implements IFirebaseLoadDo
 
     }
 
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.buttonBack2:
+                startActivity(new Intent(this,MainActivity_Customer.class));
+        }
+    }
 }
