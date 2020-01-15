@@ -145,7 +145,7 @@ public class notification extends Service
                 .setContentTitle(title) //Title for notification.
                 .setContentText(message)//Message for notification.
                 .setAutoCancel(true); //Clears notification after click.
-        Intent intent = new Intent(getApplicationContext(), built_in_meals.class);
+        Intent intent = new Intent(getApplicationContext(), login.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(pendingIntent);
         mNotificationManager.notify(0, mBuilder.build());
