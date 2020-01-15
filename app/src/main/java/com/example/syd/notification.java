@@ -10,6 +10,8 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 import androidx.core.app.NotificationCompat;
+
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -105,16 +107,17 @@ public class notification extends Service
                             @Override
                             public void onChildAdded(com.google.firebase.database.DataSnapshot dataSnapshot, String s)
                             {
-                                showNotification("Hi!",  "A new menu has been added");
+                                if(!FirebaseAuth.getInstance().getCurrentUser().getEmail().contains("admin"))
+                                    showNotification("Hi!",  "A new menu has been added");
                                 Log.v(TAG,"CHECK");
                             }
 
                             @Override
                             public void onChildChanged(com.google.firebase.database.DataSnapshot dataSnapshot, String s)
                             {
-
-                                showNotification("Hi!",  "A new menu has been added");
-                               Log.v(TAG,"CHECK");
+//                                if(!FirebaseAuth.getInstance().getCurrentUser().getEmail().contains("admin"))
+//                                showNotification("Hi!",  "A new menu has been added");
+//                               Log.v(TAG,"CHECK");
                             }
 
                             @Override
