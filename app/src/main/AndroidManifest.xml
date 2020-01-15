@@ -14,7 +14,6 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".customer_update_profile"></activity>
-        <activity android:name=".built_in_meals$customer_update_profile" />
         <activity android:name=".customer_my_menus" />
         <activity android:name=".MainActivity_nutritionist" />
         <activity android:name=".customer_meal" />
@@ -24,6 +23,7 @@
         <activity android:name=".goalActivity" />
         <activity android:name=".customer_signup" />
         <activity android:name=".login">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,7 +38,15 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+        <service
+            android:name=".notification"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="your.app.domain.NotificationService" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />

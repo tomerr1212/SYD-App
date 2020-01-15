@@ -30,7 +30,7 @@ public class customer_my_menus extends AppCompatActivity implements IFirebaseLoa
     DatabaseReference menusRef,memberReff,dbreff;
     List<readyMenu> menus;
     IFirebaseLoadDoneM iFirebaseLoadDoneM;
-
+    private String mymenus;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,13 +67,12 @@ public class customer_my_menus extends AppCompatActivity implements IFirebaseLoa
         });
 
         memberReff = FirebaseDatabase.getInstance().getReference("Member");
-
         memberReff.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 textViewGoalNum.setText(dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("BMR").getValue().toString());
-
+                 mymenus = dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("my_menus").getValue().toString();
             }
 
             @Override
@@ -103,8 +102,6 @@ public class customer_my_menus extends AppCompatActivity implements IFirebaseLoa
             }
         });
 
-
-
         findViewById(R.id.buttonBack2).setOnClickListener(this);
         findViewById(R.id.buttonKeepMenu).setOnClickListener(this);
     }
@@ -113,12 +110,11 @@ public class customer_my_menus extends AppCompatActivity implements IFirebaseLoa
     @Override
     public void onFirebaseLoadSuccess(List<readyMenu> menusList) {
         menus = menusList;
-
         List<String> menus_id_list = new ArrayList<>();
 
-
         for (int i =0;i<menusList.size(); i++) {
-            menus_id_list.add(""+i);
+            if(mymenus.contains(menusList.get(i).getMenuname()))
+                menus_id_list.add(menusList.get(i).getMenuname());
         }
 
         ArrayAdapter<String> adapterBF = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,menus_id_list);

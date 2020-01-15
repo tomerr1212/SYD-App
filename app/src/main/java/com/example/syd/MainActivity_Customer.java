@@ -45,6 +45,7 @@ public class MainActivity_Customer extends AppCompatActivity {
             }
 
         });
+
         buttonMyMenus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity_Customer.this, customer_my_menus.class));

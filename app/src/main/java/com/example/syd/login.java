@@ -29,7 +29,6 @@ public class login extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_login);
         // Initialize Firebase Auth
 
-        startService(new Intent(this, notification.class));
 
         mAuth = FirebaseAuth.getInstance();
         editTextEmail = findViewById(R.id.login_email);
@@ -47,6 +46,8 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                         editTextPassword.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        startService(new Intent(login.this, notification.class));
+
                         if(task.isSuccessful()){
                             if(editTextEmail.getText().toString().contains("admin")){
                                 startActivity(new Intent(login.this, MainActivity_nutritionist.class));

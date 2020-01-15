@@ -76,6 +76,7 @@ public class notification extends Service
 
     public void stoptimertask()
     {
+
         //Stops the timer, if it's not already null.
         if (timer != null)
         {
@@ -86,27 +87,34 @@ public class notification extends Service
 
     public void initializeTimerTask()
     {
-        timerTask = new TimerTask()
-        {
-            public void run()
-            {
-                //Uses an handler to run a toast that shows the current timestamp.
-                handler.post(new Runnable()
-                {
-                    public void run()
-                    {
-                        database = FirebaseDatabase.getInstance().getReference();
+//t        Log.println(Log.ERROR,"----startinit",database.child("Menu").toString());
+
+                        timerTask = new TimerTask()
+                        {
+                            public void run()
+                            {
+                                //Uses an handler to run a toast that shows the current timestamp.
+                                handler.post(new Runnable()
+                                {
+                                    public void run()
+                                    {
+                                        database = FirebaseDatabase.getInstance().getReference();
+                        Log.println(Log.ERROR,"----",database.child("Menu").toString());
                         database.child("Menu").addChildEventListener(new ChildEventListener()
                         {
                             @Override
                             public void onChildAdded(com.google.firebase.database.DataSnapshot dataSnapshot, String s)
                             {
                                 showNotification("Hi!",  "A new menu has been added");
+                                Log.v(TAG,"CHECK");
                             }
 
                             @Override
                             public void onChildChanged(com.google.firebase.database.DataSnapshot dataSnapshot, String s)
                             {
+
+                                showNotification("Hi!",  "A new menu has been added");
+                               Log.v(TAG,"CHECK");
                             }
 
                             @Override
@@ -140,7 +148,7 @@ public class notification extends Service
             channel.setDescription("Message");
             mNotificationManager.createNotificationChannel(channel);
         }
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "YOUR_CHANNEL_ID")
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(), "1")
                 .setSmallIcon(R.mipmap.ic_launcher) //Notification icon.
                 .setContentTitle(title) //Title for notification.
                 .setContentText(message)//Message for notification.

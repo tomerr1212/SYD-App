@@ -183,7 +183,7 @@ public class MainActivity_nutritionist extends AppCompatActivity implements  Vie
         readymenu.setMenuname(editTextMenuName.getText().toString());
         dbreff.push().setValue(readymenu);
 
-        addNotification();
+      //  addNotification();
 
 
     }
