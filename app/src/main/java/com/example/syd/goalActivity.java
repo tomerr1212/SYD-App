@@ -22,7 +22,6 @@ import com.google.firebase.database.ValueEventListener;
 
 public class goalActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
-    Spinner spinnerWeeklyActivity,spinnerWeeklyGoal;
     TextView editTextKG;
     DatabaseReference dbreff, memberReff;
     private FirebaseAuth mAuth;
@@ -37,12 +36,9 @@ public class goalActivity extends AppCompatActivity implements AdapterView.OnIte
         Spinner spinnerActivity = findViewById(R.id.spinnerWeeklyActivity);
 
         mAuth = FirebaseAuth.getInstance();
-
         editTextKG = findViewById(R.id.editTextKG);
 
-
         dbreff = FirebaseDatabase.getInstance().getReference().child("Member");
-
         memberReff = FirebaseDatabase.getInstance().getReference("Member");
 
         memberReff.addValueEventListener(new ValueEventListener() {

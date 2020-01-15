@@ -25,9 +25,9 @@
 
     <Button
         android:id="@+id/buttonCamera"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="84dp"
+        android:layout_marginBottom="76dp"
         android:background="@color/aqua"
         android:padding="15dp"
         android:text="Upload photo from gallery"
@@ -35,7 +35,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -43,9 +43,79 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Update profile"
-        app:layout_constraintTop_toBottomOf="@+id/buttonCamera"
-        tools:layout_editor_absoluteX="137dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonCamera" />
 
+    <TextView
+        android:id="@+id/textViewAge"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="84dp"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:text="age"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/editTextAge"
+        android:layout_width="317dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="84dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textViewAge"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewWE"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="204dp"
+        android:text="Weight"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextWE"
+        android:layout_width="317dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="80dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textViewWE"
+        app:layout_constraintTop_toBottomOf="@+id/editTextAge" />
+
+    <TextView
+        android:id="@+id/textViewWeeklyActivity"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="112dp"
+        android:padding="1dp"
+        android:text="Weekly Activity"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewWE" />
+
+    <Spinner
+        android:id="@+id/spinnerCustomerWeeklyActivity"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
+
+        android:layout_marginTop="112dp"
+        android:layout_marginEnd="32dp"
+        android:entries="@array/weekly_activity"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewWeeklyActivity"
+        app:layout_constraintTop_toBottomOf="@+id/editTextWE" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 

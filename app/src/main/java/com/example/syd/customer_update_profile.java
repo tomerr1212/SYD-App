@@ -9,38 +9,79 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 
-public class customer_update_profile extends AppCompatActivity{
-
+public class customer_update_profile extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+    EditText editTextWE,editTextAge;
     Button buttonUpdateProfile, buttonCamera;
     FirebaseAuth mAuth;
     ArrayList<String> myimages = new ArrayList<>();
     String CUSTOMER_PROFILE_CHANNEL_ID = "customer profile update";
     private static final int ImageBack =1;
     private StorageReference Folder;
+    DatabaseReference memberReff;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_update_profile);
         mAuth = FirebaseAuth.getInstance();
         Folder= FirebaseStorage.getInstance().getReference().child("ImageFolder");
+        editTextAge = findViewById(R.id.editTextAge);
+        editTextWE = findViewById(R.id.editTextWE);
+        Spinner spinnerActivity = findViewById(R.id.spinnerCustomerWeeklyActivity);
+        ArrayAdapter<CharSequence> activityAdapter = ArrayAdapter.createFromResource(this,R.array.weekly_activity,android.R.layout.simple_spinner_item);
+        activityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerActivity.setAdapter(activityAdapter);
+        spinnerActivity.setOnItemSelectedListener(this);
 
+
+
+        memberReff = FirebaseDatabase.getInstance().getReference("Member");
+
+        memberReff.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                double weight=0;
+                int age=0;
+                String activitygoal="";
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    weight = Double.parseDouble(postSnapshot.child("weight").getValue().toString());
+                    age = Integer.parseInt(postSnapshot.child("age").getValue().toString());
+                    activitygoal = postSnapshot.child("activitygoal").getValue().toString();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         buttonUpdateProfile = findViewById(R.id.buttonUpdateProfile);
         buttonCamera=findViewById(R.id.buttonCamera);
         buttonCamera.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +93,9 @@ public class customer_update_profile extends AppCompatActivity{
         buttonUpdateProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                memberReff.child(mAuth.getCurrentUser().getUid()).child("age").setValue(editTextAge.getText().toString().trim());
+                memberReff.child(mAuth.getCurrentUser().getUid()).child("weight").setValue(editTextWE.getText().toString().trim());
+
                 addNotification();
             }
         });
@@ -71,9 +115,7 @@ public class customer_update_profile extends AppCompatActivity{
 
         if(requestCode==ImageBack){
             if(resultCode== RESULT_OK){
-
                 Uri ImageData = data.getData();
-
                 final StorageReference Imagename = Folder.child(mAuth.getCurrentUser().getUid()).child("image" + ImageData.getLastPathSegment());
                 Imagename.putFile(ImageData).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -88,10 +130,8 @@ public class customer_update_profile extends AppCompatActivity{
                                 myimages.add(String.valueOf(uri));
                                 imagestore.child("myimages").setValue(myimages.toString());
                                 Toast.makeText(customer_update_profile.this,"Uploaded", Toast.LENGTH_SHORT).show();
-
                             }
                         });
-
                     }
                 });
             }
@@ -102,10 +142,9 @@ public class customer_update_profile extends AppCompatActivity{
     }
 
     private void addNotification() {
-        //Log.println(Log.ERROR,"INADD",memberReff.child(mAuth.getCurrentUser().getUid()).child("name").getKey());
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CUSTOMER_PROFILE_CHANNEL_ID)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
-                .setContentTitle("THIS IS MEMBER")
+                .setContentTitle("Hey !")
                 .setContentText("Your profile has been updated")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
@@ -130,4 +169,14 @@ public class customer_update_profile extends AppCompatActivity{
     }
 
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String text = parent.getItemAtPosition(position).toString();
+            memberReff.child(mAuth.getCurrentUser().getUid()).child("activitygoal").setValue(text);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }
