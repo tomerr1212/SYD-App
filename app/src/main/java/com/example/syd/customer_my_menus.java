@@ -73,9 +73,7 @@ public class customer_my_menus extends AppCompatActivity implements IFirebaseLoa
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 textViewGoalNum.setText(dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("BMR").getValue().toString());
-//                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-//
-//                }
+
             }
 
             @Override

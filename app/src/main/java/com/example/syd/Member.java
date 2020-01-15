@@ -4,13 +4,21 @@ import java.util.ArrayList;
 
 public class Member {
 
-    private String Name, Gender, email,activitygoal;
+    private String Name, Gender, email,activitygoal, myimages;
     private int Age;
     private double Weight, Height,weeklygoal,targetweight,dailygoalcalories;
     private ArrayList<String> customer_menus;
 
     public Member() {
 
+    }
+
+    public String getMyimages() {
+        return myimages;
+    }
+
+    public void setMyimages(String myimages) {
+        this.myimages = myimages;
     }
 
     public String getName() {

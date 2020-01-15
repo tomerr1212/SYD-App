@@ -150,6 +150,7 @@ public class customer_signup extends AppCompatActivity implements View.OnClickLi
                     member.setWeight(weight);
                     member.setHeight(height);
                     member.setGender(gender);
+                    member.setMyimages("");
                     dbreff.child(mAuth.getUid()).setValue(member);
 
 

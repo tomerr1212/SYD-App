@@ -1,10 +1,13 @@
 package com.example.syd;
 
-import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import com.example.syd.Interface.IFirebaseLoadDone;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,13 +44,14 @@ public class MainActivity_nutritionist extends AppCompatActivity implements  Vie
     DatabaseReference dbreff,mealsRef;
     List<Double> calories = new ArrayList<>();
     double bfCalorieSum=0,luCalorieSum=0,snCalorieSum=0,diCalorieSum=0;
-
+    NotificationChannel nutritionChannel;
+    String NUTRITIONIS_CHANNEL_ID = "Nutritionis_ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_nutritionist);
-
+        Log.println(Log.ERROR,"build version",Build.VERSION.RELEASE);
 
         dbreff = FirebaseDatabase.getInstance().getReference().child("Menu");
         mAuth = FirebaseAuth.getInstance();
@@ -138,7 +143,6 @@ public class MainActivity_nutritionist extends AppCompatActivity implements  Vie
             }
         });
 
-
         findViewById(R.id.buttonBack).setOnClickListener(this);
         findViewById(R.id.buttonSave).setOnClickListener(this);
     }
@@ -166,10 +170,15 @@ public class MainActivity_nutritionist extends AppCompatActivity implements  Vie
         String lunch = searchableSpinnerLU.getItemAtPosition(searchableSpinnerLU.getSelectedItemPosition()).toString();
         String snack = searchableSpinnerSN.getItemAtPosition(searchableSpinnerSN.getSelectedItemPosition()).toString();
         String dinner = searchableSpinnerDI.getItemAtPosition(searchableSpinnerDI.getSelectedItemPosition()).toString();
-
+        String name = editTextMenuName.getText().toString().trim();
 
         String author = mAuth.getCurrentUser().getUid();
 
+        if (name.isEmpty()) {
+            editTextMenuName.setError("Please insert menu name");
+            editTextMenuName.requestFocus();
+            return;
+        }
 
         readymenu.setBreakfast(breakfast);
         readymenu.setLunch(lunch);
@@ -180,17 +189,37 @@ public class MainActivity_nutritionist extends AppCompatActivity implements  Vie
         readymenu.setMenuname(editTextMenuName.getText().toString());
         dbreff.push().setValue(readymenu);
 
+        addNotification();
+
+
     }
-    String tittle="New menu added";
-    String subject="Testing";
-    String body="Dinner";
 
-    NotificationManager notif=(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-    Notification notify=new Notification.Builder
-            (getApplicationContext()).setContentTitle(tittle).setContentText(body).
-            setContentTitle(subject).setSmallIcon(R.drawable.common_google_signin_btn_icon_dark).build();
+    private void addNotification() {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NUTRITIONIS_CHANNEL_ID)
+                .setSmallIcon(R.mipmap.ic_launcher_round)
+                .setContentTitle("New menu added")
+                .setContentText(editTextMenuName.getText())
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
+        Intent notificationIntent = new Intent(this, MainActivity_nutritionist.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent
+                , PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(contentIntent);
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        manager.notify(0, builder.build());
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(NUTRITIONIS_CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
     @Override
     public void onFirebaseLoadSuccess(List<Meal> mealList) {
         meals = mealList;

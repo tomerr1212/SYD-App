@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/gradient"
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient">
 
 
     <TextView
@@ -23,18 +23,28 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <TextView
-        android:id="@+id/textViewCamera"
+    <Button
+        android:id="@+id/buttonCamera"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="84dp"
         android:background="@color/aqua"
         android:padding="15dp"
-        android:text="Take a photo"
+        android:text="Upload photo from gallery"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonUpdateProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update profile"
+        app:layout_constraintTop_toBottomOf="@+id/buttonCamera"
+        tools:layout_editor_absoluteX="137dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
