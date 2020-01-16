@@ -89,7 +89,6 @@ public class notification extends Service
 
     public void initializeTimerTask()
     {
-//t        Log.println(Log.ERROR,"----startinit",database.child("Menu").toString());
 
                         timerTask = new TimerTask()
                         {
@@ -117,7 +116,7 @@ public class notification extends Service
                             {
 //                                if(!FirebaseAuth.getInstance().getCurrentUser().getEmail().contains("admin"))
 //                                showNotification("Hi!",  "A new menu has been added");
-//                               Log.v(TAG,"CHECK");
+//                                Log.v(TAG,"CHECK");
                             }
 
                             @Override
@@ -156,7 +155,7 @@ public class notification extends Service
                 .setContentTitle(title) //Title for notification.
                 .setContentText(message)//Message for notification.
                 .setAutoCancel(true); //Clears notification after click.
-        Intent intent = new Intent(getApplicationContext(), login.class);
+        Intent intent = new Intent(getApplicationContext(), built_in_meals.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(pendingIntent);
         mNotificationManager.notify(0, mBuilder.build());

@@ -12,6 +12,7 @@ public class MainActivity_Customer extends AppCompatActivity {
     Button buttonBuiltInMenu;
     Button buttonUpdateProfile;
     Button buttonLogout;
+    Button buttonMyimages;
 
 
     @Override
@@ -23,7 +24,7 @@ public class MainActivity_Customer extends AppCompatActivity {
         buttonUpdateProfile = findViewById(R.id.buttonUpdateProfile);
         buttonLogout = findViewById(R.id.buttonLogout);
         buttonMyMenus = findViewById(R.id.buttonMyMenus);
-
+        buttonMyimages = findViewById(R.id.buttonMyimages);
 
         buttonBuiltInMenu.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -35,6 +36,13 @@ public class MainActivity_Customer extends AppCompatActivity {
         buttonUpdateProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity_Customer.this, customer_update_profile.class));
+            }
+
+        });
+
+        buttonMyimages.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity_Customer.this, customer_images.class));
             }
 
         });

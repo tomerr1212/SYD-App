@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".customer_update_profile"></activity>
+        <activity android:name=".customer_images" />
+        <activity android:name=".customer_update_profile" />
         <activity android:name=".customer_my_menus" />
         <activity android:name=".MainActivity_nutritionist" />
         <activity android:name=".customer_meal" />
@@ -23,7 +24,6 @@
         <activity android:name=".goalActivity" />
         <activity android:name=".customer_signup" />
         <activity android:name=".login">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,6 +47,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />

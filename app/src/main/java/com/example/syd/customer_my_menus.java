@@ -24,13 +24,14 @@ import java.util.List;
 
 public class customer_my_menus extends AppCompatActivity implements IFirebaseLoadDoneM, View.OnClickListener {
 
-    TextView textViewBFData,textViewLunchData,textViewSNData,textViewDIData,textViewSumNum,textViewGoalNum;
+    TextView textViewBFData, textViewLunchData, textViewSNData, textViewDIData, textViewSumNum, textViewGoalNum;
     SearchableSpinner searchableSpinnerMenus;
     private FirebaseAuth mAuth;
-    DatabaseReference menusRef,memberReff,dbreff;
+    DatabaseReference menusRef, memberReff, dbreff;
     List<readyMenu> menus;
     IFirebaseLoadDoneM iFirebaseLoadDoneM;
     private String mymenus;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,17 +42,15 @@ public class customer_my_menus extends AppCompatActivity implements IFirebaseLoa
         textViewSNData = findViewById(R.id.textViewSNData);
         textViewDIData = findViewById(R.id.textViewDIData);
         textViewSumNum = findViewById(R.id.textViewSumNum);
-        textViewGoalNum=findViewById(R.id.textViewGoalNum);
+        textViewGoalNum = findViewById(R.id.textViewGoalNum);
 
         searchableSpinnerMenus = findViewById(R.id.searchableSpinnerMenus);
 
 
-        searchableSpinnerMenus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-        {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-            {
+        searchableSpinnerMenus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem = parent.getItemAtPosition(position).toString();
-                Log.println(Log.ERROR,"Tagging Size", selectedItem);
+                Log.println(Log.ERROR, "Tagging Size", selectedItem);
                 textViewSumNum.setText(String.valueOf(menus.get(position).getSum()));
                 textViewBFData.setText(menus.get(position).getBreakfast());
                 textViewLunchData.setText(menus.get(position).getLunch());
@@ -60,8 +59,8 @@ public class customer_my_menus extends AppCompatActivity implements IFirebaseLoa
 
 
             } // to close the onItemSelected
-            public void onNothingSelected(AdapterView<?> parent)
-            {
+
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
@@ -72,7 +71,7 @@ public class customer_my_menus extends AppCompatActivity implements IFirebaseLoa
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 textViewGoalNum.setText(dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("BMR").getValue().toString());
-                 mymenus = dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("my_menus").getValue().toString();
+                mymenus = dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("my_menus").getValue().toString();
             }
 
             @Override
@@ -90,12 +89,13 @@ public class customer_my_menus extends AppCompatActivity implements IFirebaseLoa
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 List<readyMenu> menus = new ArrayList<>();
-                for(DataSnapshot menuSnapshot:dataSnapshot.getChildren()){
+                for (DataSnapshot menuSnapshot : dataSnapshot.getChildren()) {
                     menus.add(menuSnapshot.getValue(readyMenu.class));
                 }
                 iFirebaseLoadDoneM.onFirebaseLoadSuccess(menus);
 
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -112,17 +112,18 @@ public class customer_my_menus extends AppCompatActivity implements IFirebaseLoa
         menus = menusList;
         List<String> menus_id_list = new ArrayList<>();
 
-        for (int i =0;i<menusList.size(); i++) {
-            if(mymenus.contains(menusList.get(i).getMenuname()))
+        for (int i = 0; i < menusList.size(); i++) {
+            if (mymenus.contains(menusList.get(i).getMenuname()))
                 menus_id_list.add(menusList.get(i).getMenuname());
         }
 
-        ArrayAdapter<String> adapterBF = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,menus_id_list);
+        ArrayAdapter<String> adapterBF = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, menus_id_list);
 
         searchableSpinnerMenus.setAdapter(adapterBF);
 
 
     }
+
     @Override
     public void onFirebaseLoadFailed(String message) {
 
