@@ -12,7 +12,7 @@
         android:id="@+id/textViewProfileUpdate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#efe41f"
+        android:background="#C97291"
         android:text="Update Profile"
         android:textAlignment="center"
         android:textSize="20sp"

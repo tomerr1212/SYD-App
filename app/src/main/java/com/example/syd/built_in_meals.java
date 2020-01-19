@@ -24,7 +24,7 @@ import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 import java.util.ArrayList;
 import java.util.List;
 
-public class built_in_meals extends AppCompatActivity implements IFirebaseLoadDoneM,View.OnClickListener {
+public class built_in_meals extends AppCompatActivity implements IFirebaseLoadDoneM {
 
     TextView textViewBFData,textViewLunchData,textViewSNData,textViewDIData,textViewSumNum,textViewGoalNum;
     SearchableSpinner searchableSpinnerMenus;
@@ -62,8 +62,14 @@ public class built_in_meals extends AppCompatActivity implements IFirebaseLoadDo
 
         });
 
-        buttonBack2 = findViewById(R.id.buttonBack2);
+        buttonBack2 = findViewById(R.id.buttonBack3);
 
+        buttonBack2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(built_in_meals.this, MainActivity_Customer.class));
+            }
+
+        });
         searchableSpinnerMenus = findViewById(R.id.searchableSpinnerMenus);
 
 
@@ -152,11 +158,4 @@ public class built_in_meals extends AppCompatActivity implements IFirebaseLoadDo
 
     }
 
-    @Override
-    public void onClick(View v) {
-        switch(v.getId()){
-            case R.id.buttonBack2:
-                startActivity(new Intent(this,MainActivity_Customer.class));
-        }
-    }
 }

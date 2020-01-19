@@ -93,8 +93,20 @@ public class customer_update_profile extends AppCompatActivity implements Adapte
         buttonUpdateProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                memberReff.child(mAuth.getCurrentUser().getUid()).child("age").setValue(editTextAge.getText().toString().trim());
-                memberReff.child(mAuth.getCurrentUser().getUid()).child("weight").setValue(editTextWE.getText().toString().trim());
+                String age = editTextAge.getText().toString().trim();
+                String weight = editTextWE.getText().toString().trim();
+                if (age.isEmpty()) {
+                    editTextAge.setError("Age is required");
+                    editTextAge.requestFocus();
+                    return;
+                }
+                if (weight.isEmpty()) {
+                    editTextWE.setError("Age is required");
+                    editTextWE.requestFocus();
+                    return;
+                }
+                memberReff.child(mAuth.getCurrentUser().getUid()).child("age").setValue(age);
+                memberReff.child(mAuth.getCurrentUser().getUid()).child("weight").setValue(weight);
 
                 addNotification();
             }

@@ -1,10 +1,12 @@
 package com.example.syd;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,9 +24,10 @@ import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 import java.util.ArrayList;
 import java.util.List;
 
-public class customer_my_menus extends AppCompatActivity implements IFirebaseLoadDoneM, View.OnClickListener {
+public class customer_my_menus extends AppCompatActivity implements IFirebaseLoadDoneM {
 
     TextView textViewBFData, textViewLunchData, textViewSNData, textViewDIData, textViewSumNum, textViewGoalNum;
+    Button buttonBack3;
     SearchableSpinner searchableSpinnerMenus;
     private FirebaseAuth mAuth;
     DatabaseReference menusRef, memberReff, dbreff;
@@ -102,8 +105,12 @@ public class customer_my_menus extends AppCompatActivity implements IFirebaseLoa
             }
         });
 
-        findViewById(R.id.buttonBack2).setOnClickListener(this);
-        findViewById(R.id.buttonKeepMenu).setOnClickListener(this);
+        buttonBack3 =findViewById(R.id.buttonBack3);
+        buttonBack3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(customer_my_menus.this, MainActivity_Customer.class));
+            }
+        });
     }
 
 
@@ -129,8 +136,5 @@ public class customer_my_menus extends AppCompatActivity implements IFirebaseLoa
 
     }
 
-    @Override
-    public void onClick(View v) {
 
-    }
 }

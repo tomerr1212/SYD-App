@@ -21,10 +21,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
         android:layout_marginBottom="653dp"
-        android:fontFamily="serif-monospace"
         android:gravity="center"
         android:text="@string/app_name"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="#161313"
         android:textSize="34sp"
         android:textStyle="bold"
         android:id="@+id/txt" />
@@ -42,8 +41,8 @@
         android:background="@drawable/shape"
         android:padding="15dp"
         android:hint="@string/Email"
-        android:textColorHint="@color/colorAccent"
-        android:textColor="@color/colorAccent"
+        android:textColorHint="#F3ECEC"
+        android:textColor="#F3ECEC"
         android:id="@+id/login_email"
         android:singleLine="true"/>
 
@@ -61,8 +60,8 @@
         android:inputType="textPassword"
         android:padding="15dp"
         android:singleLine="true"
-        android:textColor="@color/colorAccent"
-        android:textColorHint="@color/colorAccent" />
+        android:textColor="#F3ECEC"
+        android:textColorHint="#F3ECEC" />
 
 
     <TextView
@@ -73,7 +72,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="12dp"
         android:layout_marginTop="105dp"
-        android:background="#23976c"
+        android:background="#9ACFEC"
         android:focusable="true"
         android:padding="12dp"
         android:text="LOG IN"
@@ -91,7 +90,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="12dp"
         android:layout_marginTop="500dp"
-        android:background="#23776c"
+        android:background="#18F5D4"
         android:focusable="true"
         android:text="Sign Up HERE"
         android:textAlignment="center"
@@ -106,7 +105,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="12dp"
         android:layout_marginTop="550dp"
-        android:background="#FFEB3B"
+        android:background="#E4E9A0D9"
         android:focusable="true"
         android:text="Nutritionist? Sign UP Here"
         android:textAlignment="center"
