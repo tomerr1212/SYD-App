@@ -10,9 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignBottom="@+id/textViewSignup"
-        android:layout_marginBottom="-186dp"
-        android:alpha="0.6"
-        android:background="@drawable/background" />
+        android:layout_marginBottom="-196dp"
+        android:alpha="0.7"
+        android:background="@drawable/fruits" />
 
     <TextView
 
@@ -23,7 +23,7 @@
         android:layout_marginBottom="653dp"
         android:gravity="center"
         android:text="@string/app_name"
-        android:textColor="#161313"
+        android:textColor="#860B22"
         android:textSize="34sp"
         android:textStyle="bold"
         android:id="@+id/txt" />
