@@ -32,13 +32,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.util.ArrayList;
-
 public class customer_update_profile extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     EditText editTextWE,editTextAge;
     Button buttonUpdateProfile, buttonCamera;
     FirebaseAuth mAuth;
-    ArrayList<String> myimages = new ArrayList<>();
     String CUSTOMER_PROFILE_CHANNEL_ID = "customer profile update";
     private static final int ImageBack =1;
     private StorageReference Folder;
@@ -101,7 +98,7 @@ public class customer_update_profile extends AppCompatActivity implements Adapte
                     return;
                 }
                 if (weight.isEmpty()) {
-                    editTextWE.setError("Age is required");
+                    editTextWE.setError("Weight is required");
                     editTextWE.requestFocus();
                     return;
                 }
@@ -124,11 +121,10 @@ public class customer_update_profile extends AppCompatActivity implements Adapte
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if(requestCode==ImageBack){
             if(resultCode== RESULT_OK){
                 Uri ImageData = data.getData();
-                final StorageReference Imagename = Folder.child(mAuth.getCurrentUser().getUid()).child("image" + ImageData.getLastPathSegment());
+                final StorageReference Imagename = Folder.child(mAuth.getCurrentUser().getUid()).child(ImageData.getLastPathSegment() + ".jpeg");
                 Imagename.putFile(ImageData).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -136,11 +132,7 @@ public class customer_update_profile extends AppCompatActivity implements Adapte
                         Imagename.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                DatabaseReference imagestore = FirebaseDatabase.getInstance().getReference()
-                                        .child("Member").child(mAuth.getCurrentUser().getUid());
 
-                                myimages.add(String.valueOf(uri));
-                                imagestore.child("myimages").setValue(myimages.toString());
                                 Toast.makeText(customer_update_profile.this,"Uploaded", Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -148,9 +140,6 @@ public class customer_update_profile extends AppCompatActivity implements Adapte
                 });
             }
         }
-
-
-
     }
 
     private void addNotification() {
